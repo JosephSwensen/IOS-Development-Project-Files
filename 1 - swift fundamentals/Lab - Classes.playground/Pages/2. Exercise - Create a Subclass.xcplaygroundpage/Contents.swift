@@ -47,7 +47,8 @@ destroyer.moveRight()
 print(destroyer.position)
 //:  Try to print `weapon` on `falcon`. Why doesn't this work? Provide your answer in a comment or a print statement below, and remove any code you added that doesn't compile.
 // becasue falcon doe not existed
-
+let falcon = Spaceship()
+print(falcon.weapon)
 //:  Add a method to `fighter` called `fire()`. This should check to see if `remainingFirePower` is greater than 0, and if so, should decrement `remainingFirePower` by one. If `remainingFirePower` is not greater than 0, print "You have no more fire power." Call `fire()` on `destroyer` a few times and print `remainingFirePower` after each method call.
 destroyer.fire()
 print(destroyer.remainingFirePower)

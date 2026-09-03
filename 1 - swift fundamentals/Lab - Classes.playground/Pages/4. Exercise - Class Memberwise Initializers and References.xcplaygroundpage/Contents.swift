@@ -34,11 +34,11 @@ class Fighter: Spaceship {
     let weapon: String
     var remainingFirePower: Int
     
-    init(weapon: String, remainingFirePower: Int) {
+    init(name: String, health: Int, position: Int, weapon: String, remainingFirePower: Int) {
         self.weapon = weapon
         self.remainingFirePower = remainingFirePower
         
-        super.init(name: "", health: 0, position: 0)
+        super.init(name: name, health: health, position: position)
     }
 
     func fire() {

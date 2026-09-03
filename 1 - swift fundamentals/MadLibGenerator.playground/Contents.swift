@@ -28,17 +28,17 @@ struct MadLibGenerator {
         
         func generateMadLib() -> String {
             if hasValidInput {
-                return """
-        The Weirdest Day Ever One morning, I woke up feeling very \(verb1). I looked out the window and saw a \(bug) riding a \(favCar) down the street. I quickly grabbed my \(food) and ran outside. The animal looked at me and yelled, “\(verb2)!” Suddenly, \(noun) giant \(building) appeared from behind a \(noun). They started \(verb1) everywhere. I knew I had to do something, so I used my secret power of \(building). Everyone stopped and stared. Then the animal gave me a \(noun) and said, “You just saved \(favCar)!” I went back home, ate \(food), and decided it was the most \(verb2) day of my life. 
-        """
-            } else {
-                return "Invalid input"
-            }
             
             switch selectedStoryNumber {
             case 1:
+                print("""
+        The Weirdest Day Ever One morning, I woke up feeling very \(verb1). I looked out the window and saw a \(bug) riding a \(favCar) down the street. I quickly grabbed my \(food) and ran outside. The animal looked at me and yelled, “\(verb2)!” Suddenly, \(noun) giant \(building) appeared from behind a \(noun). They started \(verb1) everywhere. I knew I had to do something, so I used my secret power of \(building). Everyone stopped and stared. Then the animal gave me a \(noun) and said, “You just saved \(favCar)!” I went back home, ate \(food), and decided it was the most \(verb2) day of my life. 
+        """)
             case 2:
             case 3:
+                Preview
+            default:
+                print("failed")
             }
             
         }
