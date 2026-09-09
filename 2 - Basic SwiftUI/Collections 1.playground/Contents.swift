@@ -191,6 +191,6 @@ class ParkingLot {
 var parkingLot = ParkingLot()
     
 print(parkingLot.parkCar("Ford Pinto", parkingSpace: 6))
-
+print(parkingLot.parkingSpace6)
 print(parkingLot.giveTicket(parkingSpace: 6))
 print(parkingLot.parkingSpace6)
