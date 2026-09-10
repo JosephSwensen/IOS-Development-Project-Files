@@ -20,9 +20,10 @@ if let daysInJan = dayInMonth["January"] {
 var shapesArray = ["triangle", "circle", "rectangle"]
 var colorsArray = ["green", "blue", "red"]
 
-var x: [String : [String]] = [shapesArray: "Shapes"]
+var x: [String : [String]] = ["Shapes": shapesArray, "Colors": colorsArray]
+print(x)
 //:  Print the last element of `colorsArray`, accessing it through the dictionary you've created. You'll have to use if-let syntax or the force unwrap operator to unwrap what is returned from the dictionary before you can access an element of the array.
-
+print(x["Colors"]![2])
 
 /*:
 [Previous](@previous)  |  page 3 of 4  |  [Next: App Exercise - Pacing](@next)
