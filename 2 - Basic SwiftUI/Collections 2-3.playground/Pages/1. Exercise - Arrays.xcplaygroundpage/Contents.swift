@@ -9,17 +9,17 @@ var registrationList: [String] = []
 registrationList.append("Jasmine")
 print(registrationList[0])
 //:  Add four additional names into the array using the `+=` operator. All of the names should be added in one step. Print the contents of the collection.
-registrationList.append("bob")
+registrationList += ["bob", "joey", "kaylie", "brylee"]
 
 //:  Use the `insert(_:at:)` method to add `Trey` into the array as the second element. Print the contents of the collection.
-
-
+registrationList.insert("trey", at: 5)
+print(registrationList)
 //:  Somebody had a conflict and decided to transfer registration to someone else. Use array subscripting to change the sixth element to `Elton`. Print the contents of the collection.
-
-
+registrationList.remove(at: 5)
+registrationList.append("Elton")
 //:  Call `removeLast()` on `registrationList`. If done correctly, this should remove `Elton` from the collection. Store the result of `removeLast()` into a new constant `deletedItem`, then print `deletedItem`.
-
-
+let deletedItem = registrationList.removeLast()
+print(deletedItem)
 /*:
 page 1 of 4  |  [Next: App Exercise - Activity Challenge](@next)
  */
