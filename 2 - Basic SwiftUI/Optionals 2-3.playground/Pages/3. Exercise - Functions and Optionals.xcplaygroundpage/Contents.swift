@@ -26,14 +26,11 @@ var prices = ["Chips": 3.69, "Donuts": 1.89, "Juice": 4.99, "Apple": 0.70, "Bana
 var stock = ["Chips": 4, "Donuts": 0, "Juice": 12, "Apple": 6, "Banana": 6, "Broccoli": 3]
 
 func purchase(_ item: String) -> Double? {
-    if let amount = stock[item] {
-        if amount > 0 {
-            print(prices[item]!)
-        } else {
-            return nil
-        }
+    if let amount = stock[item], amount > 0 {
+        return prices[item]!
+    } else {
+        return nil
     }
-    return nil
 }
 
 purchase("Apple")

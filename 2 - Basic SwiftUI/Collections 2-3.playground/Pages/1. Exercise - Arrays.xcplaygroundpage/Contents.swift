@@ -12,11 +12,10 @@ print(registrationList[0])
 registrationList += ["bob", "joey", "kaylie", "brylee"]
 
 //:  Use the `insert(_:at:)` method to add `Trey` into the array as the second element. Print the contents of the collection.
-registrationList.insert("trey", at: 5)
+registrationList.insert("trey", at: 1)
 print(registrationList)
 //:  Somebody had a conflict and decided to transfer registration to someone else. Use array subscripting to change the sixth element to `Elton`. Print the contents of the collection.
-registrationList.remove(at: 5)
-registrationList.append("Elton")
+registrationList[5] = "Elton"
 //:  Call `removeLast()` on `registrationList`. If done correctly, this should remove `Elton` from the collection. Store the result of `removeLast()` into a new constant `deletedItem`, then print `deletedItem`.
 let deletedItem = registrationList.removeLast()
 print(deletedItem)

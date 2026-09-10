@@ -19,11 +19,8 @@ print(userAge)
 
  Print `userAge` again, but this time unwrap `userAge` using the force unwrap operator.
  */
-if let userAge {
-    print(userInputAge)
-} else {
-    print("invaild input")
-}
+    print(userAge!)
+
 
 //:  Now use optional binding to unwrap `userAge`. If `userAge` has a value, print it to the console.
 if let userAge {
