@@ -11,7 +11,7 @@ import SwiftUI
 import PlaygroundSupport
 
 struct WaterTrackerView: View {
-    var glassesOfWater = 0
+    @State var glassesOfWater = 0
 
     var body: some View {
         VStack {
@@ -32,7 +32,7 @@ PlaygroundPage.current.setLiveView(WaterTrackerView())
 
  Explain in one sentence, in a comment below, what `@State` gave `glassesOfWater` that a plain `var` did not.
  */
-
+// it gave it the ability to be redrawn in the view
 
 
 

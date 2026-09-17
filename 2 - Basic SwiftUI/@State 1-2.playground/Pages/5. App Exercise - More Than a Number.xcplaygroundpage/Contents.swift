@@ -14,12 +14,22 @@ import PlaygroundSupport
 
 struct WorkoutView: View {
     @State private var minutesExercised = 0
+    @State var goalMet: Bool = false
+    @State var workoutName: String = "Morning walk"
 
     var body: some View {
+        Text("\(workoutName)")
         VStack {
             Text("Minutes: \(minutesExercised)")
+            var goal = goalMet ? Text("Goal met") : Text("Not there yet")
             Button("Add 10 minutes") {
                 minutesExercised += 10
+            }
+            Button("Toggle goal") {
+                goalMet.toggle()
+            }
+            Button("Rename to Evening run") {
+                workoutName = "Evening run"
             }
         }
         .frame(width: 320, height: 480)

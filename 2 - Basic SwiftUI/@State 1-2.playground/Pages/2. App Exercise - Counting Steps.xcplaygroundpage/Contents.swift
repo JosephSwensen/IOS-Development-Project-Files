@@ -14,17 +14,23 @@
 import SwiftUI
 import PlaygroundSupport
 
-struct StepCounterView: View {
-    var body: some View {
-        VStack {
-            Text("Steps today")
-
-        }
-        .frame(width: 320, height: 480)
-    }
-}
-
-PlaygroundPage.current.setLiveView(StepCounterView())
+//struct StepCounterView: View {
+//    @State var stepCount = 0
+//
+//    var body: some View {
+//        VStack {
+//            Text("Steps today")
+//            Text("\(stepCount)")
+//
+//            Button("add steps") {
+//                stepCount += 500
+//            }
+//        }
+//        .frame(width: 320, height: 480)
+//    }
+//}
+//
+//PlaygroundPage.current.setLiveView(StepCounterView())
 
 
 /*:

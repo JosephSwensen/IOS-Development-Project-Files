@@ -28,13 +28,13 @@ struct BrokenCounterView: View {
 
 
 //:  Write the error message Xcode gave you in a comment below. Start a line with `//` to write a comment.
-
+//Left side of mutating operator isn't mutable: 'self' is immutable
 
 
 
 
 //:  The button's action runs inside `body`, and `body` is not `mutating`. Explain in a comment why that stops `tapCount += 1` from working.
-
+//becase it stops the botton from changing the value you have to have to @State
 
 
 

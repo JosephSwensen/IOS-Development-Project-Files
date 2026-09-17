@@ -12,9 +12,28 @@ import PlaygroundSupport
 
 struct MyTrackerView: View {
 
+    @State var leangthOfSleep: Int = 0
+    @State var quilty: String = ""
+    @State var doYouFeelRested: Bool = false
+    
     var body: some View {
         VStack {
-
+            Text("\(leangthOfSleep)")
+            Button("add 1hr") {
+                leangthOfSleep += 1
+            }
+            
+            
+            Text("\(quilty)")
+            Button("quilty good") {
+                quilty = "good"
+            }
+            
+            Text("\(doYouFeelRested)")
+            Button("do You Feel Rested yes or no") {
+                doYouFeelRested.toggle()
+            }
+Spacer()
         }
         .frame(width: 320, height: 480)
     }
