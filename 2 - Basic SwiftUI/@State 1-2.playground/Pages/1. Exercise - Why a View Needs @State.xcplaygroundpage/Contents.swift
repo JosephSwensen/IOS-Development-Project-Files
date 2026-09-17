@@ -14,7 +14,7 @@
 import SwiftUI
 
 struct BrokenCounterView: View {
-    var tapCount = 0
+    @State var tapCount = 0
 
     var body: some View {
         VStack {
