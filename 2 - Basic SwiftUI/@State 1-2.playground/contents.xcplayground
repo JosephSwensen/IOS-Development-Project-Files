@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='ios' display-mode='rendered' executeOnSourceChanges='true'>
+    <pages>
+        <page name='1. Exercise - Why a View Needs @State'/>
+        <page name='2. App Exercise - Counting Steps'/>
+        <page name='3. Exercise - Fixing a Broken Counter'/>
+        <page name='4. App Exercise - A Goal Tracker'/>
+        <page name='5. App Exercise - More Than a Number'/>
+        <page name='6. Exercise - Predict the Redraw'/>
+        <page name='7. App Exercise - Build Your Own Card'/>
+        <page name='8. Black Diamond - A Type You Wrote Yourself'/>
+    </pages>
+</playground>
