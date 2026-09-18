@@ -35,7 +35,7 @@ func getWinner(competitors: [User]) -> User? {
     return topCompetitor
 }
 
-
+getWinner(competitors: competitors)
 //:  Write a memberwise initializer inside the `User` struct above that uses variable shadowing for naming the parameters of the initializer.
 
 
