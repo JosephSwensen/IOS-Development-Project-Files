@@ -5,24 +5,24 @@ struct Game: Identifiable {
     var id = UUID()
 
     var title: String
-    var genra: String
+    var genre: String
     var installed: Bool
 }
 
-let zelda = Game(title: "Zelda", genra: "Adventure", installed: true)
-let mario = Game(title: "Mario Kart", genra: "Racing", installed: true)
-let minecraft = Game(title: "Minecraft", genra: "Sandbox", installed: true)
-let fortnite = Game(title: "Fortnite", genra: "Battle Royale", installed: false)
-let pokemon = Game(title: "Pokemon", genra: "RPG", installed: true)
-let halo = Game(title: "Halo", genra: "Shooter", installed: false)
+let zelda = Game(title: "Zelda", genre: "Adventure", installed: true)
+let mario = Game(title: "Mario Kart", genre: "Racing", installed: true)
+let minecraft = Game(title: "Minecraft", genre: "Sandbox", installed: true)
+let fortnite = Game(title: "Fortnite", genre: "Battle Royale", installed: false)
+let pokemon = Game(title: "Pokemon", genre: "RPG", installed: true)
+let halo = Game(title: "Halo", genre: "Shooter", installed: false)
 let animalCrossing = Game(
     title: "Animal Crossing",
-    genra: "Simulation",
+    genre: "Simulation",
     installed: true
 )
 let stardewValley = Game(
     title: "Stardew Valley",
-    genra: "Farming",
+    genre: "Farming",
     installed: false
 )
 
@@ -57,7 +57,7 @@ struct ContentView: View {
         
         List {
             ForEach(filteredGames) { game in
-                Text("\(game.title) - \(game.genra) - \(game.installed ? "Installed" : "Uninstalled")")            }
+                Text("\(game.title) - \(game.genre) - \(game.installed ? "Installed" : "Uninstalled")")            }
         }
     }
 }
