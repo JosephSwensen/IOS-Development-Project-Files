@@ -9,7 +9,7 @@ let classmates = ["Maria", "Jonah", "Avery", "Blake", "Rae"]
 
 
 //:  Call the collection's `sorted(by:)` function using trailing closure syntax. Keep the parameter names, parameter types, and the `return` statement in your closure. The closure should sort the names alphabetically. Store the result in `sortedCollection3`, then print the result.
-var sortedCollection3 = classmates.sorted { (name1: String, name2: String) -> Bool in name1 < name2 }
+var sortedCollection3 = classmates.sorted { name1, name2 in name1 < name2 }
 print(sortedCollection3)
 //:  Call `sorted(by:)` again, but remove as much of the unnecessary closure syntax as you can. Your answer should still be a closure. Store the result in `sortedCollection4`, then print the result.
 var sortedCollection4 = classmates.sorted(){ $0 < $1}
@@ -18,7 +18,7 @@ print(sortedCollection4)
 //syntactic sugar
 
 //:  Sort the collection in reverse alphabetical order using shorthand argument names. Store the result in `reversedCollection`, then print the result.
-var reversedCollection = classmates.sorted(){ $0 > $1}
+var reversedCollection = classmates.sorted { $0 > $1}
 print(reversedCollection)
 
 //:  Sort the collection alphabetically one more time, but pass only an operator to `sorted(by:)`. Store the result in `sortedCollection5`, then print the result.
