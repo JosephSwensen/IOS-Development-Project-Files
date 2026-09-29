@@ -11,9 +11,13 @@ struct DiscoverScreen: View {
     let discoverRecipes = Recipe.discoverList
     
     var body: some View {
-        List(discoverRecipes) { recipe in
-            Text(recipe.title)
-            
+        NavigationStack {
+            List(discoverRecipes) { recipe in
+                NavigationLink(destination: RecipeDetailScreen(recipe: recipe)) {
+                    Text(recipe.title)
+                }
+                
+            }
         }
         .navigationTitle("Discover")
     }

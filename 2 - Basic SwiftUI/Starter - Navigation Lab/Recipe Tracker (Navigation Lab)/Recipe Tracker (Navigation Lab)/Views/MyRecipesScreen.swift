@@ -25,6 +25,11 @@ struct MyRecipesScreen: View {
                 Button(action: { showingAddRecipe = true}) {
                     Image(systemName: "plus")
                 }
+                .sheet(isPresented: $showingAddRecipe) {
+                    NavigationStack {
+                        AddRecipeSheet(recipes: $recipes)
+                    }
+                }
             }
         }
     }

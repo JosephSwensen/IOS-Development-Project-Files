@@ -9,7 +9,20 @@ import SwiftUI
 
 struct MainTabView: View {
     var body: some View {
-        MyRecipesScreen()
+        TabView {
+            NavigationStack {
+                MyRecipesScreen()
+            }
+            .tabItem {
+                Label("My Recipes", systemImage: "square")
+            }
+            NavigationStack {
+                DiscoverScreen()
+            }
+            .tabItem {
+                Label("Discover", systemImage: "magnifyingglass")
+            }
+        }
     }
 }
 
