@@ -37,9 +37,22 @@ struct TitleView: View {
                         }
                     }
                     .sheet(isPresented: $sheetIsShowing) {
+                        
                         NavigationStack {
                             VStack {
-                                
+                                Text("Welcome")
+                                    .padding(15)
+                                    .font(.title)
+                                Text("""
+Tap the Begin button to start 
+and answer the following questions 
+to see what condiment is your 
+soulmate.
+
+If you make a mistake click the
+ \(Image(systemName: "arrow.clockwise")) button to redo your answer.
+""")
+                                .font(.title)
                             }
                                 .toolbar {
                                     ToolbarItem(placement: .topBarTrailing) {

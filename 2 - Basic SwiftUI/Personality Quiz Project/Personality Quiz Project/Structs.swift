@@ -19,28 +19,13 @@ struct Answer: Hashable {
     var text: String
     var type: CondimentType
 
-    var description: String {
-        switch type {
-        case .ketchup:
-            return "You’re classic, dependable, and somehow get along with almost everyone."
-
-        case .ranch:
-            return "You’re fun, a little chaotic, and always make things more interesting."
-
-        case .hotSauce:
-            return "You’re bold, confident, and bring the excitement wherever you go."
-
-        case .honeyMustard:
-            return "You’re sweet, chill, and just a little unexpected."
-        }
-    }
 }
 
-enum CondimentType: CaseIterable, Hashable {
-    case ketchup
-    case ranch
-    case hotSauce
-    case honeyMustard
+enum CondimentType: String {
+    case ketchup = "Ketchup"
+    case ranch = "Ranch"
+    case hotSauce = "Hot Sauce"
+    case honeyMustard = "Honey Mustard"
 }
 
 let questionList: [Question] = [
