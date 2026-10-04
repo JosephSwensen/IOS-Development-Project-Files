@@ -37,7 +37,7 @@ struct QuestionFlowView: View {
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
+                ToolbarItem(placement: .topBarTrailing) {
                     if questionIndex == 0 {
                         HStack {
                             NavigationLink("next") {
@@ -187,6 +187,7 @@ struct RangedResponseSubview: View {
                     .padding(15)
             }
         }
+        .padding(.horizontal, 50)
         HStack {
             
             Button("Save Answer") {
@@ -273,18 +274,29 @@ struct ResultsView: View {
     }
     
     var body: some View {
-        VStack(spacing: 30) {
-            Text("Your condiment soulmate is:")
-                .font(.title2)
+        ZStack {
+            Color(red: 1.0, green: 0.98, blue: 0.93)
+                .ignoresSafeArea()
             
-            Text(final.rawValue)
-                .font(.largeTitle)
+            Image("background")
+                .resizable()
+                .scaledToFit()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .ignoresSafeArea()
             
-            Text(description)
-                .font(.title2)
+            VStack(spacing: 30) {
+                Text("Your condiment soulmate is:")
+                    .font(.title2)
+                
+                Text(final.rawValue)
+                    .font(.largeTitle)
+                
+                Text(description)
+                    .font(.title2)
+                    .padding(50)
+            }
         }
     }
 }
-
 
 

@@ -42,17 +42,15 @@ struct TitleView: View {
                             VStack {
                                 Text("Welcome")
                                     .padding(15)
+                                    .font(.largeTitle)
+                                
+                                Text("Tap the Begin button to start and answer the following questions to see what condiment is your soulmate.")
+                                    .padding(50)
                                     .font(.title)
-                                Text("""
-Tap the Begin button to start 
-and answer the following questions 
-to see what condiment is your 
-soulmate.
 
-If you make a mistake click the
- \(Image(systemName: "arrow.clockwise")) button to redo your answer.
-""")
-                                .font(.title)
+                                Text("If you make a mistake click the \(Image(systemName: "arrow.clockwise")) button to redo your answer.")
+                                    .padding(50)
+                                    .font(.title)
                             }
                                 .toolbar {
                                     ToolbarItem(placement: .topBarTrailing) {
