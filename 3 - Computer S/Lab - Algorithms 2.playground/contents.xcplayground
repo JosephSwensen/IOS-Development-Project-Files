@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='macos' display-mode='rendered' executeOnSourceChanges='true'>
+    <pages>
+        <page name='1. Exercise - while Loops'/>
+        <page name='2. Exercise - Ranges and Indexes'/>
+        <page name='3. App Exercise - Genre Sets'/>
+        <page name='4. Exercise - Spot the Big-O'/>
+        <page name='5. Exercise - Linear Search'/>
+        <page name='6. App Exercise - Growing Library'/>
+        <page name='7. Exercise - Binary Search'/>
+        <page name='8. Exercise - Set vs Array Lookup'/>
+        <page name='9. App Exercise - Rank the Growth'/>
+        <page name='10. Exercise - Recursion'/>
+        <page name='11. Exercise - Sorting Algorithms'/>
+        <page name='12. Exercise - Interview Questions'/>
+    </pages>
+</playground>
