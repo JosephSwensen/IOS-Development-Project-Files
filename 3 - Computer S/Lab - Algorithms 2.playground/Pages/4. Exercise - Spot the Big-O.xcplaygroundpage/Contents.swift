@@ -19,6 +19,10 @@ func printFirstPlayCount(_ playCounts: [Int]) {
     print("Function A steps: \(steps)")
 }
 
+// I think it will print first play count: 1 then it will print function a steps: 1
+printFirstPlayCount(playCounts)
+// my prediction was right
+
 // Function B
 func printTotalPlays(_ playCounts: [Int]) {
     var steps = 0
@@ -30,6 +34,11 @@ func printTotalPlays(_ playCounts: [Int]) {
     print("Total plays: \(totalPlays)")
     print("Function B steps: \(steps)")
 }
+
+// it will print total plays: 55 and then funtion b steps: 10
+
+printTotalPlays(playCounts)
+//I was right
 
 // Function C
 func printHighestAndLowest(_ playCounts: [Int]) {
@@ -51,6 +60,11 @@ func printHighestAndLowest(_ playCounts: [Int]) {
     print("Highest: \(highestCount), lowest: \(lowestCount)")
     print("Function C steps: \(steps)")
 }
+// it will print highest: 10, lowest: 1 and then funtion c steps: 20
+
+printHighestAndLowest(playCounts)
+
+// I was right
 
 // Function D
 func printPopularPairs(_ playCounts: [Int]) {
@@ -58,7 +72,7 @@ func printPopularPairs(_ playCounts: [Int]) {
     var popularPairs = 0
     for firstCount in playCounts {
         for secondCount in playCounts {
-            // Add steps += 1 here
+            steps += 1
             if firstCount + secondCount > 15 {
                 popularPairs += 1
             }
@@ -67,6 +81,12 @@ func printPopularPairs(_ playCounts: [Int]) {
     print("Popular pairs: \(popularPairs)")
     print("Function D steps: \(steps)")
 }
+
+// It was print popular pairs: 15 and then function d steps: 100
+
+printPopularPairs(playCounts)
+
+// I was wrong becasue I did the math wrong
 
 // Function E
 func printTopThree(_ playCounts: [Int]) {
@@ -77,7 +97,8 @@ func printTopThree(_ playCounts: [Int]) {
     }
     print("Function E steps: \(steps)")
 }
-
+// It will print top song 1: 1 plays. and top song 2: 2 plays. top song 3: 3 plays. then it will print function e steps: 3
+printTopThree(playCounts)
 
 //:  Function D is missing its step counter. Add `steps += 1` on the line that says `// Add steps += 1 here`. Do not move it anywhere else.
 
@@ -90,11 +111,11 @@ func printTopThree(_ playCounts: [Int]) {
 
 /*
  Function | Big-O guess | Steps at 10 | Steps at 100
- A        |             |             |
- B        |             |             |
- C        |             |             |
- D        |             |             |
- E        |             |             |
+ A        |O(1)         | 1           |1
+ B        |O(n)         | 10          |100
+ C        |O(n)         | 20          |200
+ D        |O(n²)        | 100         |10000
+ E        |O(1)         | 3           |3
  */
 
 
@@ -105,13 +126,13 @@ func printTopThree(_ playCounts: [Int]) {
 
 
 //:  Function C has two loops, but it is not O(n²). In a comment, explain why.
-
+// becasue they are not nested
 
 
 
 
 //:  Function E has a loop, but it is O(1). In a comment, explain why.
-
+// becasue it set to run a certain number of times which is 3
 
 
 

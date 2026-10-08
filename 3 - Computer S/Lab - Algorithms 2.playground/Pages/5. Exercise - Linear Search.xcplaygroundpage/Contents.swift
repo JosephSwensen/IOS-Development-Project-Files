@@ -14,11 +14,11 @@ func linearSearch(for targetTitle: String, in titles: [String]) -> Int? {
     for (index, title) in titles.enumerated() {
         checks += 1
         if title == targetTitle {
-            // Add the "found" print here
+            print("Found \(targetTitle) after \(checks) checks")
             return index
         }
     }
-    // Add the "not found" print here
+    print("\(targetTitle) not found after \(checks) checks")
     return nil
 }
 
@@ -32,10 +32,10 @@ func linearSearch(for targetTitle: String, in titles: [String]) -> Int? {
 //:  Before you run the calls below, write how many checks each search will take in the comments.
 
 
-// Prediction for "Late Bus Home":
-// Prediction for "Paper Lanterns":
-// Prediction for "City of Glass":
-// Prediction for "Lemon Skies":
+// Prediction for "Late Bus Home": 1
+// Prediction for "Paper Lanterns": 4
+// Prediction for "City of Glass": 8
+// Prediction for "Lemon Skies": 8
 
 
 //:  Each call below starts with `_ =`. That tells Swift you only want the printout, and you are not using the index the function returns.
@@ -48,13 +48,13 @@ _ = linearSearch(for: "Lemon Skies", in: songTitles)
 
 
 //:  In a comment, answer each question. Which search was the best case? Which searches were the worst case? Why does Big-O describe the worst case?
-
+// the late bus home becasue it was the first one to be found while the wost case was lemon skies becasue it did not exist and it has to go through each element to find that out. becasue it can not predict the best case
 
 
 
 
 //:  `linearSearch` returns `Int?` and not `Int`. In a comment, explain why.
-
+// becasue it might not exist
 
 
 

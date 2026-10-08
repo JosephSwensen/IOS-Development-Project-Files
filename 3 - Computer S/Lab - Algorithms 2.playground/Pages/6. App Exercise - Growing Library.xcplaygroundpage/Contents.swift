@@ -30,7 +30,7 @@ let largeLibrary = Array(1...1000)
 //:  Before you run the calls below, predict how many checks it takes to find song 1 in each library. Write your predictions in a comment.
 
 
-// Prediction:
+// Prediction: 1
 
 _ = linearSearch(for: 1, in: smallLibrary)
 _ = linearSearch(for: 1, in: mediumLibrary)
@@ -38,7 +38,9 @@ _ = linearSearch(for: 1, in: largeLibrary)
 
 
 //:  There is no song with the ID 0. Add three lines below that search for song 0 in `smallLibrary`, `mediumLibrary` and `largeLibrary`. Write the same way as the calls above.
-
+_ = linearSearch(for: 0, in: smallLibrary)
+_ = linearSearch(for: 0, in: mediumLibrary)
+_ = linearSearch(for: 0, in: largeLibrary)
 
 
 
@@ -48,14 +50,14 @@ _ = linearSearch(for: 1, in: largeLibrary)
 
 /*
  Library size | Checks to find song 1 | Checks to find song 0
- 10           |                       |
- 100          |                       |
- 1,000        |                       |
+ 10           | 1                     |10
+ 100          | 1                     |100
+ 1,000        | 1                     |1000
  */
 
 
 //:  In a comment, answer each question. When the library gets 10 times bigger, what happens to the checks in the worst case? If the library had 1,000,000 songs, how many checks would the worst case take? What is the Big-O of linear search?
-
+// it goes up 10 times. 1_000_000. O(n)
 
 
 
