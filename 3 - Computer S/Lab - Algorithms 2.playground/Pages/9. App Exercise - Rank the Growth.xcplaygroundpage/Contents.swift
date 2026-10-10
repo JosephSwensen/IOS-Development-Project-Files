@@ -7,7 +7,7 @@
  */
 
 
-let librarySize = 10
+let librarySize = 100
 let songIDs = Array(1...librarySize)
 
 // Makes every possible two-song mix from the library
@@ -68,10 +68,10 @@ func findLastSong(in songIDs: [Int]) -> Int {
 //:  Before you run anything, rank the four functions in a comment from slowest-growing to fastest-growing. Write the Big-O next to each one.
 
 
-// Slowest-growing:
-//
-//
-// Fastest-growing:
+// Slowest-growing: showNowPlaying O(1)
+// findLastSong O(log n)
+// addUpListeningTime 0(n)
+// Fastest-growing: mixEveryPair 0(n^2)
 
 
 //:  Run the prints below and fill in the "Steps at 10" column. Then change `librarySize` at the top of the page to `100`, run the page again, and fill in the "Steps at 100" column.
@@ -84,21 +84,21 @@ print("findLastSong: \(findLastSong(in: songIDs)) steps")
 
 /*
  Function           | Steps at 10 | Steps at 100
- mixEveryPair       |             |
- showNowPlaying     |             |
- addUpListeningTime |             |
- findLastSong       |             |
+ mixEveryPair       | 100         | 10000
+ showNowPlaying     | 1           | 1
+ addUpListeningTime | 10          | 100
+ findLastSong       | 4           | 7
  */
 
 
 //:  In a comment, answer each question. Did your ranking hold up? If not, which one surprised you and why?
-
+// they did hold up
 
 
 
 
 //:  The app is about to grow to 1,000,000 songs. Which function would you rewrite first? In a comment, explain your choice using Big-O.
-
+// I would rewrite the mix one because it takes way to long because it uses 0(n^2)
 
 
 

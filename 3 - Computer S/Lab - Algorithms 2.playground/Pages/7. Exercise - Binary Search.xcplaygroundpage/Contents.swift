@@ -15,7 +15,7 @@ func binarySearch(for targetID: Int, in sortedSongIDs: [Int]) -> Int? {
     while low <= high {
         let middle = (low + high) / 2
         checks += 1
-        // Add the low, middle and high print here
+        print("low: \(low), middle: \(middle), high: \(high)")
 
         if sortedSongIDs[middle] == targetID {
             print("Found song \(targetID) after \(checks) checks")
@@ -44,21 +44,21 @@ let largeLibrary = Array(1...1000)
 //:  Before you run the call below, predict how many checks it takes to find song 700 in `largeLibrary`. Write your prediction in a comment. After you run it, look at the low, middle and high lines in the console. In a comment, describe what happens to the distance between `low` and `high` each round.
 
 
-// Prediction:
+// Prediction: 9
 
 _ = binarySearch(for: 700, in: largeLibrary)
 
 
 //:  Add three lines below that search for song 0 in `smallLibrary`, `mediumLibrary` and `largeLibrary`. Then fill in the table. Copy your worst-case numbers for linear search from the previous page.
-
-
-
+_ = binarySearch(for: 0, in: smallLibrary)
+_ = binarySearch(for: 0, in: mediumLibrary)
+_ = binarySearch(for: 0, in: largeLibrary)
 
 /*
  Library size | Linear search worst case | Binary search worst case
- 10           |                          |
- 100          |                          |
- 1,000        |                          |
+ 10           |  10                      | 4
+ 100          |  100                     | 7
+ 1,000        |  1000                    | 10
  */
 
 
@@ -67,15 +67,15 @@ _ = binarySearch(for: 700, in: largeLibrary)
 
 let unsortedSongIDs = [42, 7, 93, 15, 68, 3, 81, 29, 56, 10]
 
-// Prediction:
+// Prediction: it will find it
 
 _ = binarySearch(for: 3, in: unsortedSongIDs)
 
-// What happened:
+// What happened: it did not find it because it was not sorted
 
 
 //:  In a comment, explain what O(log n) means, using your table as the example.
-
+// means binary search like in the table how the worst case was cut in half because that is what it dose
 
 
 

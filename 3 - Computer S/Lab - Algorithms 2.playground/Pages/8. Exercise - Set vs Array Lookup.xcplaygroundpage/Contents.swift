@@ -29,7 +29,7 @@ func hasDuplicatesFast(_ songIDs: [Int]) -> Bool {
             print("Fast version: found a duplicate after \(steps) steps")
             return true
         }
-        // Add the insert here
+        seenSongIDs.insert(songID)
     }
     print("Fast version: no duplicates after \(steps) steps")
     return false
@@ -44,7 +44,7 @@ let recentlyPlayed = [12, 5, 31, 8, 5, 19]
 _ = hasDuplicatesSlow(recentlyPlayed)
 _ = hasDuplicatesFast(recentlyPlayed)
 
-// Why the fast version is wrong:
+// Why the fast version is wrong: becasue it never adds anything to the Set
 
 
 //:  Fix the fast version. On the line that says `// Add the insert here`, add `seenSongIDs.insert(songID)`. Run the page again and check that both versions now find the duplicate.
@@ -58,18 +58,18 @@ _ = hasDuplicatesFast(recentlyPlayed)
 
 let longHistory = Array(1...100)
 
-// Prediction for slow:
-// Prediction for fast:
+// Prediction for slow: 10000
+// Prediction for fast: 100
 
 _ = hasDuplicatesSlow(longHistory)
 _ = hasDuplicatesFast(longHistory)
 
-// Big-O of hasDuplicatesSlow:
-// Big-O of hasDuplicatesFast:
+// Big-O of hasDuplicatesSlow: 0(N^2)
+// Big-O of hasDuplicatesFast: 0(N)
 
 
 //:  In a comment, explain why `seenSongIDs.contains(songID)` is faster than searching an array for the same ID.
-
+//becasue it goes stright to the value instead of checking every single one
 
 
 
