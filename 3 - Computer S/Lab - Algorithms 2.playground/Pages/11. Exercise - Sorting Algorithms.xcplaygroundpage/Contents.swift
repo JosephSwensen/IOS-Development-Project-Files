@@ -29,7 +29,7 @@ func selectionSort(_ playCounts: [Int]) -> [Int] {
     for startIndex in 0..<sortedCounts.count {
         var smallestIndex = startIndex
         for index in (startIndex + 1)..<sortedCounts.count {
-            // Add comparisons += 1 here
+            comparisons += 1
             if sortedCounts[index] < sortedCounts[smallestIndex] {
                 smallestIndex = index
             }
@@ -82,7 +82,7 @@ func mergeSort(_ playCounts: [Int]) -> [Int] {
 
 
 //:  In a comment, write which lines are the base case in `mergeSort`.
-
+// 74
 
 
 
@@ -96,7 +96,7 @@ func mergeSort(_ playCounts: [Int]) -> [Int] {
 //:  Before you run the code below, predict which sort will make the fewest comparisons on 10 play counts. Write it in a comment. Then run it and fill in the "10 shuffled" column of the table.
 
 
-// Prediction:
+// Prediction: I think merge will be the shortest
 
 let shuffledPlayCounts = [42, 7, 93, 15, 68, 3, 81, 29, 56, 10]
 
@@ -109,9 +109,9 @@ print(mergeSorted)
 
 /*
  Sort      | 10 shuffled | 10 already sorted | 100 shuffled
- Bubble    |             |                   |
- Selection |             |                   |
- Merge     |             |                   |
+ Bubble    | 45          | 45                | 4950
+ Selection | 45          | 45                | 4950
+ Merge     | 24          | 15                | 537
  */
 
 
@@ -120,17 +120,29 @@ print(mergeSorted)
 
 let alreadySorted = Array(1...10)
 
-// Prediction:
+// Prediction: I think it will change it and make it easy for them to sort
 
+let bubbleSorted1 = bubbleSort(alreadySorted)
+let selectionSorted1 = selectionSort(alreadySorted)
+mergeSortComparisons = 0
+let mergeSorted1 = mergeSort(alreadySorted)
+print("Merge sort: \(mergeSortComparisons) comparisons")
+print(mergeSorted1)
 
+// it only made it easy for merge becasue it didnt have to sort them first
 //:  `shuffled()` returns the same items in a random order. Sort `bigShuffle` with all three sorts the same way, and fill in the "100 shuffled" column. Your merge sort number may be a little different from a classmate's, because the order is random.
 
 
 let bigShuffle = Array(1...100).shuffled()
 
-
+let bubbleSorted2 = bubbleSort(bigShuffle)
+let selectionSorted2 = selectionSort(bigShuffle)
+mergeSortComparisons = 0
+let mergeSorted2 = mergeSort(bigShuffle)
+print("Merge sort: \(mergeSortComparisons) comparisons")
+print(mergeSorted2)
 //:  In a comment, explain why bubble and selection sort are O(n²) and merge sort is O(n log n). Use your 100 shuffled numbers as the example.
-
+// becasue it goes through each item two times and merge is that because first it sorts and then it slips in half like in the 100 suffeled the merge sorted fisrt and then then slip that is why is it was to short unlike the bubble and selection which went through every thing twice and that is why it took so long to sort.
 
 
 
@@ -139,8 +151,8 @@ let bigShuffle = Array(1...100).shuffled()
 
 
 let playlistTitles = ["Rooftop Radio", "Coffee at Noon", "Static Summer", "Late Bus Home"]
-
-
+let titlesZToA = playlistTitles.sorted(by: > )
+print(titlesZToA)
 /*:
  [Previous](@previous)  |  page 11 of 12  |  [Next: Exercise - Interview Questions](@next)
  */
