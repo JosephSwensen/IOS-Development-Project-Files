@@ -7,14 +7,14 @@
 
 import SwiftUI
 
+enum Mode {
+    case easy
+    case medium
+    case hard
+}
+
 struct PracticeMode: View {
-    @State var mode: modes
-    
-    enum modes {
-        case easy
-        case medium
-        case hard
-    }
+    @State var mode: Mode
     
     var body: some View {
         HStack {

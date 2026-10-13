@@ -8,9 +8,38 @@
 import SwiftUI
 
 struct SelectMultiplecation: View {
-    @State var selectedMultiplication: Int = 2
+    @Binding var selectedMultiplication: Int
+    @State var buttonDisabledAdd: Bool = false
+    @State var buttonDisabledMinus: Bool = false
     
     var body: some View {
-        Stepper("select which multiplication tables to practice ", value: $selectedMultiplication, in: 2...12)
+           
+        VStack {
+            Text("\(selectedMultiplication)")
+            HStack {
+                
+                Button("+") {
+                    selectedMultiplication += 1
+                    
+                    buttonDisabledMinus = false
+                    
+                    if selectedMultiplication == 12 {
+                        buttonDisabledAdd = true
+                    }
+                }
+                .disabled(buttonDisabledAdd)
+                
+                Button("-") {
+                    selectedMultiplication -= 1
+                    
+                    buttonDisabledAdd = false
+                    
+                    if selectedMultiplication == 2 {
+                        buttonDisabledMinus = true
+                    }
+                }
+                .disabled(buttonDisabledMinus)
+            }
+        }
     }
 }

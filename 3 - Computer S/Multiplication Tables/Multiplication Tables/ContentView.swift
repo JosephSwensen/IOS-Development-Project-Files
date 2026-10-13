@@ -8,14 +8,36 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var numberOfQuestions: Int = 5
+    @State var selectedMultiplication: Int = 2
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            NavigationLink("test") {
+                SelectMultiplecation(selectedMultiplication: $selectedMultiplication)
+                
+                NavigationStack {
+                    NavigationLink("next") {
+                        NumberOfQuestions(numberOfQuestions: $numberOfQuestions)
+                        
+                        NavigationStack {
+                            NavigationLink("Start") {
+                                Questions(
+                                    numberOfQuestions: $numberOfQuestions,
+                                    selectedMultiplication: $selectedMultiplication
+                                )
+                            }
+                            
+                        }
+                    }
+                    
+                }
+                
+            }
+            
+            
+
         }
-        .padding()
     }
 }
 
