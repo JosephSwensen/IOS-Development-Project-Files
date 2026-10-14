@@ -31,16 +31,22 @@ struct Questions: View {
         practiceQuestionsRandomNumbers = numbers
     }
     
+    func getAnswer(selectedMultiplication: Int, practiceQuestionsRandomNumber: Int) -> Int {
+        var answer = selectedMultiplication * practiceQuestionsRandomNumber
+        return answer
+    }
+    
     var body: some View {
         VStack {
             if questionsIndex < practiceQuestionsRandomNumbers.count {
+                let answer = getAnswer(selectedMultiplication: selectedMultiplication, practiceQuestionsRandomNumber: practiceQuestionsRandomNumbers[questionsIndex])
                 Text("\(selectedMultiplication) X \(practiceQuestionsRandomNumbers[questionsIndex])")
                     .font(.largeTitle)
+                Text("\(answer)")
             } else {
                 Text("Game Over!")
                     .font(.largeTitle)
             }
-            
             
             
             if questionsIndex < practiceQuestionsRandomNumbers.count {
@@ -49,6 +55,8 @@ struct Questions: View {
                 }
                 .padding()
             }
+            
+            
         }
         .onAppear {
             generateRandomNumbers()

@@ -40,7 +40,7 @@ cashier.takePayment()
 //:  In a comment, explain which SOLID principle `FoodTruckWorker` breaks.
 
 
-// Principle:
+// Principle: single responsibility becasue the it has the worker doing 2 jobs
 
 
 //:  Split `FoodTruckWorker` into two protocols called `Cooking` and `PaymentTaking`, each with one function. Delete `FoodTruckWorker`. Change `Chef` and `Cashier` so each one conforms only to the protocol it needs, and delete their empty functions. Run the page and check that the printout has not changed.
