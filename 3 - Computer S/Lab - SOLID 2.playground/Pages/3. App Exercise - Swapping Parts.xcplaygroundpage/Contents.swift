@@ -9,21 +9,21 @@
  */
 
 
-protocol FoodTruckWorker {
+protocol Cooking {
     func cook()
+}
+
+protocol PaymentTaking {
     func takePayment()
 }
 
-class Chef: FoodTruckWorker {
+class Chef: Cooking {
     func cook() {
         print("Cooking street tacos")
     }
-
-    func takePayment() { }
 }
 
-class Cashier: FoodTruckWorker {
-    func cook() { }
+class Cashier: PaymentTaking {
 
     func takePayment() {
         print("Taking payment")

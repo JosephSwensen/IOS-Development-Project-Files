@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @State var numberOfQuestions: Int = 5
     @State var selectedMultiplication: Int = 2
+    @State var mode: Mode = .easy
     
     var body: some View {
         NavigationStack {
@@ -19,16 +20,23 @@ struct ContentView: View {
                 NavigationStack {
                     NavigationLink("next") {
                         NumberOfQuestions(numberOfQuestions: $numberOfQuestions)
-                        
                         NavigationStack {
-                            NavigationLink("Start") {
-                                Questions(
-                                    numberOfQuestions: $numberOfQuestions,
-                                    selectedMultiplication: $selectedMultiplication
-                                )
+                            NavigationLink("mode") {
+                                PracticeMode(mode: $mode)
+                                
+                                
+                                
+                                NavigationStack {
+                                    NavigationLink("Start") {
+                                        Questions(mode: $mode, numberOfQuestions: $numberOfQuestions,
+                                                  selectedMultiplication: $selectedMultiplication
+                                        )
+                                    }
+                                }
                             }
                             
                         }
+                        
                     }
                     
                 }
@@ -36,7 +44,7 @@ struct ContentView: View {
             }
             
             
-
+            
         }
     }
 }

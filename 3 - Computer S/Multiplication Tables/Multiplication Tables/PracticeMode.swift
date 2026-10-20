@@ -14,7 +14,7 @@ enum Mode {
 }
 
 struct PracticeMode: View {
-    @State var mode: Mode
+    @Binding var mode: Mode
     
     var body: some View {
         HStack {
