@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='macos' display-mode='rendered' executeOnSourceChanges='true'>
+    <pages>
+        <page name='1. Exercise - Generic Functions'/>
+        <page name='2. App Exercise - Order Helpers'/>
+        <page name='3. Exercise - Constraints'/>
+        <page name='4. App Exercise - Where Clauses'/>
+        <page name='5. Exercise - Building a Queue'/>
+        <page name='6. App Exercise - Order Line'/>
+    </pages>
+</playground>
