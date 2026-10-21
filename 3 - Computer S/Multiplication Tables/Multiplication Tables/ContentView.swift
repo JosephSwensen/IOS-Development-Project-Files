@@ -13,30 +13,26 @@ struct ContentView: View {
     @State var mode: Mode = .easy
     
     var body: some View {
-        NavigationStack {
-            NavigationLink("test") {
-                SelectMultiplecation(selectedMultiplication: $selectedMultiplication)
-                
-                NavigationStack {
-                    NavigationLink("next") {
-                        NumberOfQuestions(numberOfQuestions: $numberOfQuestions)
-                        NavigationStack {
-                            NavigationLink("mode") {
-                                PracticeMode(mode: $mode)
-                                
-                                
-                                
-                                NavigationStack {
-                                    NavigationLink("Start") {
-                                        Questions(mode: $mode, numberOfQuestions: $numberOfQuestions,
-                                                  selectedMultiplication: $selectedMultiplication
-                                        )
-                                    }
+        VStack {
+            NavigationStack {
+                NavigationLink("test") {
+                    SelectMultiplecation(selectedMultiplication: $selectedMultiplication)
+                    
+                    NavigationStack {
+                        NavigationLink("next") {
+                            NumberOfQuestions(numberOfQuestions: $numberOfQuestions)
+                            NavigationStack {
+                                NavigationLink(destination: PracticeMode(mode: $mode)) {
+                                    Text("Next Question")
+                                        .font(.largeTitle)
+                                        .frame(width: 350, height: 100)
+                                        .background(Color.blue)
+                                        .foregroundColor(.white)
+                                        .cornerRadius(40)
                                 }
+                                
                             }
-                            
                         }
-                        
                     }
                     
                 }

@@ -14,31 +14,58 @@ struct NumberOfQuestions: View {
     @State var numberQuestionsDisabled5: Bool = false
     
     var body: some View {
+        Spacer()
+        Spacer()
+        Spacer()
+        Spacer()
+        Spacer()
+        
         VStack {
-            Button("20") {
+            Button(action: {
                 numberOfQuestions = 20
                 
                 numberQuestionsDisabled10 = true
                 numberQuestionsDisabled5 = true
+            }) {
+                Text("20")
+                    .font(.largeTitle)
+                    .frame(width: 350, height: 100)
+                    .background(Color.red)
+                    .foregroundColor(.white)
+                    .cornerRadius(40)
             }
             .disabled(numberQuestionsDisabled20)
             
             HStack {
-                Button("10") {
-                    numberOfQuestions = 10
+                Button(action: { numberOfQuestions = 10
                     
                     numberQuestionsDisabled20 = true
                     numberQuestionsDisabled5 = true
+                }) {
+                    Text("10")
+                        .font(.largeTitle)
+                        .frame(width: 175, height: 100)
+                        .background(Color.yellow)
+                        .foregroundColor(.white)
+                        .cornerRadius(40)
                 }
                 .disabled(numberQuestionsDisabled10)
                 
-                Button("5") {
+                Button(action: {
                     numberOfQuestions = 5
                     
                     numberQuestionsDisabled20 = true
                     numberQuestionsDisabled10 = true
+                }) {
+                    Text("5")
+                        .font(.largeTitle)
+                        .frame(width: 175, height: 100)
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(40)
                 }
                 .disabled(numberQuestionsDisabled5)
+                
             }
         }
     }

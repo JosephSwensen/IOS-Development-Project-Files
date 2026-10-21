@@ -9,137 +9,164 @@
 import SwiftUI
 
 struct Questions: View {
+    @State var buttonClicked: Bool = false 
     @State var A: Int = 0
     @State var B: Int = 0
     @State var C: Int = 0
     @State var D: Int = 0
-
+    
     @State var questionsIndex: Int = 0
     @State var practiceQuestionsRandomNumbers: [Int] = []
-
+    
     @Binding var mode: Mode
     @Binding var numberOfQuestions: Int
     @Binding var selectedMultiplication: Int
-
+    
     func generateRandomNumbers() {
         let range: ClosedRange<Int>
-
+        
         switch mode {
         case .easy: range = 1...26
         case .medium: range = 21...43
         case .hard: range = 41...89
         }
-
+        
         var numbers = Set<Int>()
-
-        // Prevent asking for more unique numbers than exist
         let questionCount = min(numberOfQuestions, range.count)
-
+        
         while numbers.count < questionCount {
             numbers.insert(Int.random(in: range))
         }
-
+        
         var number = Array(numbers)
         number.shuffle()
         practiceQuestionsRandomNumbers = number
     }
-
+    
     func getAnswer(selectedMultiplication: Int, practiceQuestionsRandomNumber: Int) -> Int {
-        var answer = selectedMultiplication * practiceQuestionsRandomNumber
-        return answer
+        return selectedMultiplication * practiceQuestionsRandomNumber
     }
-
+    
     func generateButtonAnswers() {
-        guard questionsIndex < practiceQuestionsRandomNumbers.count else {
-            return
-        }
-
+        guard questionsIndex < practiceQuestionsRandomNumbers.count else { return }
+        
         let answer = getAnswer(
             selectedMultiplication: selectedMultiplication,
             practiceQuestionsRandomNumber: practiceQuestionsRandomNumbers[questionsIndex]
         )
-
+        
         var answers = Set<Int>()
-
-        while answers.count < 4 {
-            let randomAnswer = Int.random(in: 1...100)
-
+        
+        let lowerBound = max(1, answer - 20)
+        let upperBound = answer + 20
+        
+        while answers.count < 3 {
+            let randomAnswer = Int.random(in: lowerBound...upperBound)
             if randomAnswer != answer {
                 answers.insert(randomAnswer)
             }
         }
-
-        let wrongAnswers = Array(answers)
-
-        A = wrongAnswers[0]
-        B = wrongAnswers[1]
-        C = wrongAnswers[2]
-        D = wrongAnswers[3]
-
-        let randomButtonNumber = Int.random(in: 1...4)
-
-        switch randomButtonNumber {
-        case 1:
-            A = answer
-        case 2:
-            B = answer
-        case 3:
-            C = answer
-        case 4:
-            D = answer
-        default:
-            break
-        }
+        
+        var finalAnswers = Array(answers)
+        finalAnswers.append(answer)
+        finalAnswers.shuffle()
+        
+        A = finalAnswers[0]
+        B = finalAnswers[1]
+        C = finalAnswers[2]
+        D = finalAnswers[3]
     }
-
+    
     var body: some View {
         VStack {
+            Spacer()
             if questionsIndex < practiceQuestionsRandomNumbers.count {
                 Text("\(selectedMultiplication) X \(practiceQuestionsRandomNumbers[questionsIndex])")
                     .font(.largeTitle)
-            } else {
-                Text("Game Over!")
-                    .font(.largeTitle)
-            }
-
-            if questionsIndex < practiceQuestionsRandomNumbers.count {
-                VStack {
-                    HStack {
-                        Button("\(A)") {
-
+                    .padding()
+                
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+                
+                VStack(spacing: 5) {
+                    HStack(spacing: 5) {
+                        Button(action: { buttonClicked = true }) {
+                            Text("\(A)")
+                                .font(.largeTitle)
+                                .frame(width: 175, height: 100)
+                                .background(Color.red)
+                                .foregroundColor(.white)
+                                .cornerRadius(40)
                         }
-
-                        Button("\(B)") {
-
+                        .disabled(buttonClicked)
+                        
+                        Button(action: { buttonClicked = true }) {
+                            Text("\(B)")
+                                .font(.largeTitle)
+                                .frame(width: 175, height: 100)
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(40)
                         }
+                        .disabled(buttonClicked)
                     }
-
-                    HStack {
-                        Button("\(C)") {
-
+                    
+                    HStack(spacing: 5) {
+                        Button(action: { buttonClicked = true }) {
+                            Text("\(C)")
+                                .font(.largeTitle)
+                                .frame(width: 175, height: 100)
+                                .background(Color.yellow)
+                                .foregroundColor(.white)
+                                .cornerRadius(40)
                         }
-
-                        Button("\(D)") {
-
+                        .disabled(buttonClicked)
+                        
+                        Button(action: { buttonClicked = true }) {
+                            Text("\(D)")
+                                .font(.largeTitle)
+                                .frame(width: 175, height: 100)
+                                .background(Color.green)
+                                .foregroundColor(.white)
+                                .cornerRadius(40)
                         }
+                        .disabled(buttonClicked)
                     }
-
-                    Button("Next Question") {
+                    
+                    Button(action: {
                         questionsIndex += 1
-
+                        buttonClicked = false
+                        
                         if questionsIndex < practiceQuestionsRandomNumbers.count {
                             generateButtonAnswers()
                         }
+                    }) {
+                        Text("Next Question")
+                            .font(.largeTitle)
+                            .frame(width: 350, height: 100)
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(40)
                     }
-                    .padding()
+                    .padding(.top)
                 }
+                
+                Spacer()
+            } else {
+                Text("Game Over!")
+                    .font(.largeTitle)
             }
         }
         .navigationBarBackButtonHidden(true)
         .onAppear {
             questionsIndex = 0
             generateRandomNumbers()
-            generateButtonAnswers()
+            if !practiceQuestionsRandomNumbers.isEmpty {
+                generateButtonAnswers()
+            }
         }
     }
 }

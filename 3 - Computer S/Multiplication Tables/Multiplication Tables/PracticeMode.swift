@@ -15,6 +15,8 @@ enum Mode {
 
 struct PracticeMode: View {
     @Binding var mode: Mode
+    @State var numberOfQuestions: Int = 5
+    @State var selectedMultiplication: Int = 2
     
     var body: some View {
         HStack {
@@ -30,6 +32,11 @@ struct PracticeMode: View {
                 mode = .hard
             }
         }
+        NavigationLink("Start") {
+            Questions(mode: $mode, numberOfQuestions: $numberOfQuestions,
+                      selectedMultiplication: $selectedMultiplication)
+        }
     }
-    
 }
+
+
