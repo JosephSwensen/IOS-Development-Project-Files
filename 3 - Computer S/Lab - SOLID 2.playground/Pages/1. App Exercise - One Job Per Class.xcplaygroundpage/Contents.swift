@@ -46,19 +46,19 @@ class FoodTruckOrder {
 
 
 //:  Split the class. Create a class called `ReceiptPrinter` with a function called `printReceipt(for order: FoodTruckOrder)`. Create a class called `OrderTexter` with a function called `sendOrderReadyText(for order: FoodTruckOrder)`. Move the code from `FoodTruckOrder` into the new functions, then delete `printReceipt()` and `sendOrderReadyText()` from `FoodTruckOrder`. Create an instance of each new class, call both functions with `tacoOrder`, and observe the printout.
-class ReceiptPrinter: FoodTruckOrder {
+class ReceiptPrinter {
     func printReceipt(for order: FoodTruckOrder) {
-        print("Receipt for \(customerName)")
-        for itemName in itemNames {
+        print("Receipt for \(order.customerName)")
+        for itemName in order.itemNames {
             print("- \(itemName)")
         }
-        print("Total: $\(total)")
+        print("Total: $\(order.total)")
     }
 }
 
-class OrderTexter: FoodTruckOrder {
+class OrderTexter {
     func sendOrderReadyText(for order: FoodTruckOrder) {
-        print("Texting \(customerName): Your order is ready!")
+        print("Texting \(order.customerName): Your order is ready!")
     }
 }
 

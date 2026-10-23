@@ -29,9 +29,9 @@ func duplicate<T>(_ value: T) -> [T] {
 
 
 //:  Call `duplicate(_:)` three times: with an `Int`, with a `String` and with a `Bool`. Store each result in its own constant with a descriptive name, and print all three. Then option-click each constant and write its type in a comment next to it.
-let duplicateInt = duplicate(_: 5)
-let duplicateString = duplicate(_: "5")
-let duplicateBool = duplicate(_: true)
+let duplicateInt = duplicate(5)
+let duplicateString = duplicate("5")
+let duplicateBool = duplicate(true)
 
 print(duplicateInt) // [Int]
 print(duplicateString) // [String]

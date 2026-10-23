@@ -69,8 +69,12 @@ class SpeakerNotifier: OrderNotifier {
 }
 
 class OrderWindow {
-    private let notifier = TextNotifier()
+    private let notifier: OrderNotifier
 
+    init(notifier: OrderNotifier) {
+        self.notifier = notifier
+    }
+    
     func callOrder(for customerName: String) {
         notifier.notify("\(customerName), your order is ready!")
     }
@@ -78,8 +82,10 @@ class OrderWindow {
 
 
 //:  `OrderWindow` creates a `TextNotifier` itself, so it can only ever send texts. Change `OrderWindow` so its `notifier` property is an `OrderNotifier` that is passed in through an initializer. Then create two `OrderWindow` instances, one with a `TextNotifier` and one with a `SpeakerNotifier`. Call `callOrder(for:)` on both and observe the printout.
-
-
+let OrderWindow1 = OrderWindow(notifier: TextNotifier())
+let OrderWindow2 = OrderWindow(notifier: SpeakerNotifier())
+OrderWindow1.callOrder(for: "Joey")
+OrderWindow2.callOrder(for: "ben")
 
 
 
@@ -98,8 +104,8 @@ class MenuBoard {
     }
 }
 
-// Principle:
-// Why:
+// Principle: single reponsibility
+// Why: becasue menu charges the card and adds items and that is not what a menu should do
 
 
 /*:
