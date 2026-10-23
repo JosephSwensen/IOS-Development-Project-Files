@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct Questions: View {
-    @State var buttonClicked: Bool = false 
+    @State var buttonClicked: Bool = false
     @State var A: Int = 0
     @State var B: Int = 0
     @State var C: Int = 0
@@ -93,12 +93,15 @@ struct Questions: View {
                 
                 VStack(spacing: 5) {
                     HStack(spacing: 5) {
-                        Button(action: { buttonClicked = true }) {
+                        Button(action: {
+                            buttonClicked = true
+                        
+                        }) {
                             Text("\(A)")
                                 .font(.largeTitle)
                                 .frame(width: 175, height: 100)
-                                .background(Color.red)
-                                .foregroundColor(.white)
+                                .background(!buttonClicked ? Color.red : Color.gray.opacity(0.8))
+                                .foregroundColor(!buttonClicked ? Color.white : Color.gray.opacity(0.8))
                                 .cornerRadius(40)
                         }
                         .disabled(buttonClicked)
@@ -107,8 +110,8 @@ struct Questions: View {
                             Text("\(B)")
                                 .font(.largeTitle)
                                 .frame(width: 175, height: 100)
-                                .background(Color.blue)
-                                .foregroundColor(.white)
+                                .background(!buttonClicked ? Color.blue : Color.gray.opacity(0.8))
+                                .foregroundColor(!buttonClicked ? Color.white : Color.gray.opacity(0.8))
                                 .cornerRadius(40)
                         }
                         .disabled(buttonClicked)
@@ -119,8 +122,8 @@ struct Questions: View {
                             Text("\(C)")
                                 .font(.largeTitle)
                                 .frame(width: 175, height: 100)
-                                .background(Color.yellow)
-                                .foregroundColor(.white)
+                                .background(!buttonClicked ? Color.yellow : Color.gray.opacity(0.8))
+                                .foregroundColor(!buttonClicked ? Color.white : Color.gray.opacity(0.8))
                                 .cornerRadius(40)
                         }
                         .disabled(buttonClicked)
@@ -129,8 +132,8 @@ struct Questions: View {
                             Text("\(D)")
                                 .font(.largeTitle)
                                 .frame(width: 175, height: 100)
-                                .background(Color.green)
-                                .foregroundColor(.white)
+                                .background(!buttonClicked ? Color.green : Color.gray.opacity(0.8))
+                                .foregroundColor(!buttonClicked ? Color.white : Color.gray.opacity(0.8))
                                 .cornerRadius(40)
                         }
                         .disabled(buttonClicked)
@@ -147,14 +150,13 @@ struct Questions: View {
                         Text("Next Question")
                             .font(.largeTitle)
                             .frame(width: 350, height: 100)
-                            .background(Color.blue)
-                            .foregroundColor(.white)
+                            .background(buttonClicked ? Color.blue : Color.gray.opacity(0.8))
+                            .foregroundColor(buttonClicked ? Color.white : Color.gray.opacity(0.8))
                             .cornerRadius(40)
                     }
                     .padding(.top)
+                    .disabled(!buttonClicked)
                 }
-                
-                Spacer()
             } else {
                 Text("Game Over!")
                     .font(.largeTitle)

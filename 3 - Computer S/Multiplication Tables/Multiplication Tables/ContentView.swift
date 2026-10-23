@@ -15,6 +15,24 @@ struct ContentView: View {
     var body: some View {
         VStack {
             NavigationStack {
+                ZStack {
+                    Rectangle()
+                        .frame(width: 300, height: 150)
+                        .cornerRadius(10)
+                        .foregroundStyle(.black)
+                    Rectangle()
+                        .frame(width: 250, height: 100)
+                        .cornerRadius(10)
+                        .foregroundStyle(.green)
+                    Text("""
+Multiplication 
+      Practice
+""")
+                        .font(.largeTitle)
+                }
+                
+                Spacer()
+                
                 NavigationLink("test") {
                     SelectMultiplecation(selectedMultiplication: $selectedMultiplication)
                     
@@ -38,9 +56,6 @@ struct ContentView: View {
                 }
                 
             }
-            
-            
-            
         }
     }
 }
