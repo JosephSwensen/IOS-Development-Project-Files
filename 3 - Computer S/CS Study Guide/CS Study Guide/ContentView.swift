@@ -3,8 +3,6 @@ import SwiftUI
 struct ContentView: View {
     private let topics: [Topic]
     @State private var searchText = ""
-    // Course 3 tool: Set. Unique topic IDs track studied topics for this session.
-    // Membership checks drive the home checkmarks; insert/remove are in the detail view.
     @State private var studiedTopicIDs: Set<String> = []
 
     init(source: any TopicSource) {
