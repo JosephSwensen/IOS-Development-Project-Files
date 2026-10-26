@@ -262,6 +262,23 @@ SCORE:
                 }
             }
             .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    ZStack {
+                        Capsule()
+                            .fill(.black)
+                            .frame(width: 100, height: 40)
+
+                        Capsule()
+                            .fill(.green)
+                            .frame(width: 94, height: 34)
+
+                        Text("\(questionsIndex) / \(numberOfQuestions)")
+                            .font(.headline)
+                            .foregroundStyle(.black)
+                    }
+                }
+            }
             .onAppear {
                 buttonClicked = false
                 correctAnswerCount = 0

@@ -86,7 +86,7 @@ struct NumberOfQuestions: View {
                     numberOfQuestions: $numberOfQuestions,
                     selectedMultiplication: $selectedMultiplication
                 )) {
-                    Text("Begin")
+                    Text("Next")
                         .font(.largeTitle)
                         .frame(width: 350, height: 100)
                         .background(buttonClicked ? Color.blue : Color.gray.opacity(0.8))

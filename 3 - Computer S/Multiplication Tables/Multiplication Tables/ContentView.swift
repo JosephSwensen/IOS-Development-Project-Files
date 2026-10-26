@@ -32,7 +32,7 @@ struct ContentView: View {
                         
                         Text("Multiplication\n  Practice")
                             .font(.largeTitle)
-                            .foregroundColor(.white)
+                            .foregroundColor(.black)
                     }
                     
                     Spacer()

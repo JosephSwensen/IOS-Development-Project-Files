@@ -77,7 +77,7 @@ struct SelectMultiplecation: View {
                 }
                 
                 NavigationLink(destination: NumberOfQuestions(numberOfQuestions: $numberOfQuestions, mode: $mode, selectedMultiplication: $selectedMultiplication)) {
-                    Text("Next Question")
+                    Text("Next")
                         .font(.largeTitle)
                         .frame(width: 350, height: 100)
                         .background(Color.blue)

@@ -80,7 +80,7 @@ struct PracticeMode: View {
                     .disabled(buttonClicked)
                 }
                 NavigationLink(destination: Questions(mode: $mode, numberOfQuestions: $numberOfQuestions, selectedMultiplication: $selectedMultiplication)) {
-                    Text("Next")
+                    Text("Begin")
                         .font(.largeTitle)
                         .frame(width: 350, height: 100)
                         .background(buttonClicked ? Color.blue : Color.gray.opacity(0.8))
