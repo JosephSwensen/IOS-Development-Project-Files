@@ -37,7 +37,16 @@ struct Questions: View {
         case .hard: range = 21...40
         }
         
-        practiceQuestionsRandomNumbers = Array(range.shuffled().prefix(numberOfQuestions))
+        var numbers = Set<Int>()
+        let questionCount = min(numberOfQuestions, range.count)
+        
+        while numbers.count < questionCount {
+            numbers.insert(Int.random(in: range))
+        }
+        
+        var number = Array(numbers)
+        number.shuffle()
+        practiceQuestionsRandomNumbers = number
     }
     
     func getAnswer(selectedMultiplication: Int, practiceQuestionsRandomNumber: Int) -> Int {
@@ -52,19 +61,19 @@ struct Questions: View {
             practiceQuestionsRandomNumber: practiceQuestionsRandomNumbers[questionsIndex]
         )
         
-        let range: ClosedRange<Int>
-        switch mode {
-        case .easy: range = 1...20
-        case .medium: range = 11...30
-        case .hard: range = 21...40
+        var answers = Set<Int>()
+        
+        let lowerBound = max(1, answer - 20)
+        let upperBound = answer + 20
+        
+        while answers.count < 3 {
+            let randomAnswer = Int.random(in: lowerBound...upperBound)
+            if randomAnswer != answer {
+                answers.insert(randomAnswer)
+            }
         }
-
-        let incorrectAnswers = range
-            .map { selectedMultiplication * $0 }
-            .filter { $0 != answer }
-            .shuffled()
-
-        var finalAnswers = Array(incorrectAnswers.prefix(3))
+        
+        var finalAnswers = Array(answers)
         finalAnswers.append(answer)
         finalAnswers.shuffle()
         
