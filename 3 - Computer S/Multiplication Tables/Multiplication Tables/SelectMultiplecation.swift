@@ -9,36 +9,82 @@ import SwiftUI
 
 struct SelectMultiplecation: View {
     @Binding var selectedMultiplication: Int
-    @State var buttonDisabledAdd: Bool = false
-    @State var buttonDisabledMinus: Bool = false
+    @State var mode: Mode = .easy
+    @State var numberOfQuestions: Int = 5
     
     var body: some View {
-           
-        VStack {
-            Text("\(selectedMultiplication)")
-            HStack {
-                
-                Button("+") {
-                    selectedMultiplication += 1
+        ZStack {
+            Color(red: 0.0, green: 0.2, blue: 0.0)
+                .ignoresSafeArea()
+            VStack {
+                Spacer()
+                Spacer()
+                ZStack {
+                    Rectangle()
+                        .frame(width: 400, height: 150)
+                        .cornerRadius(10)
+                        .foregroundStyle(.black)
                     
-                    buttonDisabledMinus = false
-                    
-                    if selectedMultiplication == 12 {
-                        buttonDisabledAdd = true
-                    }
+                    Rectangle()
+                        .frame(width: 350, height: 100)
+                        .cornerRadius(10)
+                        .foregroundStyle(.green)
+                    Text("select which multiplication you would like to practice")
+                        .font(.title)
+                        .padding(30)
                 }
-                .disabled(buttonDisabledAdd)
-                
-                Button("-") {
-                    selectedMultiplication -= 1
+                Spacer()
+                ZStack {
+                    Rectangle()
+                        .frame(width: 150, height: 100)
+                        .cornerRadius(10)
+                        .foregroundStyle(.black)
                     
-                    buttonDisabledAdd = false
-                    
-                    if selectedMultiplication == 2 {
-                        buttonDisabledMinus = true
-                    }
+                    Rectangle()
+                        .frame(width: 100, height: 50)
+                        .cornerRadius(10)
+                        .foregroundStyle(.green)
+                    Text("\(selectedMultiplication)")
+                        .font(.largeTitle)
                 }
-                .disabled(buttonDisabledMinus)
+                Spacer()
+                HStack {
+                    Button(action: {
+                        guard selectedMultiplication < 12 else { return }
+                        selectedMultiplication += 1
+                    }) {
+                        Text("+")
+                            .font(.largeTitle)
+                            .frame(width: 170, height: 100)
+                            .background(selectedMultiplication >= 12 ? Color.gray : Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(40)
+                    }
+                    .disabled(selectedMultiplication >= 12)
+                    
+                    Button(action: {
+                        guard selectedMultiplication > 2 else { return }
+                        selectedMultiplication -= 1
+                    }) {
+                        Text("-")
+                            .font(.largeTitle)
+                            .frame(width: 170, height: 100)
+                            .background(selectedMultiplication <= 2 ? Color.gray : Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(40)
+                    }
+                    .disabled(selectedMultiplication <= 2)
+                }
+                
+                NavigationLink(destination: NumberOfQuestions(numberOfQuestions: $numberOfQuestions, mode: $mode, selectedMultiplication: $selectedMultiplication)) {
+                    Text("Next Question")
+                        .font(.largeTitle)
+                        .frame(width: 350, height: 100)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(40)
+                }
+                .padding()
             }
         }
     }

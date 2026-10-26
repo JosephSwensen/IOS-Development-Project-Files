@@ -9,64 +9,93 @@ import SwiftUI
 
 struct NumberOfQuestions: View {
     @Binding var numberOfQuestions: Int
-    @State var numberQuestionsDisabled20: Bool = false
-    @State var numberQuestionsDisabled10: Bool = false
-    @State var numberQuestionsDisabled5: Bool = false
+    @Binding var mode: Mode
+    @Binding var selectedMultiplication: Int
+    
+    @State var buttonClicked = false
     
     var body: some View {
-        Spacer()
-        Spacer()
-        Spacer()
-        Spacer()
-        Spacer()
-        
-        VStack {
-            Button(action: {
-                numberOfQuestions = 20
-                
-                numberQuestionsDisabled10 = true
-                numberQuestionsDisabled5 = true
-            }) {
-                Text("20")
-                    .font(.largeTitle)
-                    .frame(width: 350, height: 100)
-                    .background(Color.red)
-                    .foregroundColor(.white)
-                    .cornerRadius(40)
-            }
-            .disabled(numberQuestionsDisabled20)
-            
-            HStack {
-                Button(action: { numberOfQuestions = 10
-                    
-                    numberQuestionsDisabled20 = true
-                    numberQuestionsDisabled5 = true
-                }) {
-                    Text("10")
+        ZStack {
+            Color(red: 0.0, green: 0.2, blue: 0.0)
+                .ignoresSafeArea()
+            VStack {
+                Spacer()
+                ZStack {
+                    Rectangle()
+                        .frame(width: 300, height: 150)
+                        .cornerRadius(10)
+                        .foregroundStyle(.black)
+
+                    Rectangle()
+                        .frame(width: 250, height: 100)
+                        .cornerRadius(10)
+                        .foregroundStyle(.green)
+
+                    Text("select number of questions")
                         .font(.largeTitle)
-                        .frame(width: 175, height: 100)
-                        .background(Color.yellow)
-                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .frame(width: 250)
+                }
+                Spacer()
+                Spacer()
+                
+                VStack {
+                    Button(action: {
+                        numberOfQuestions = 20
+                        buttonClicked = true
+                    }) {
+                        Text("20")
+                            .font(.largeTitle)
+                            .frame(width: 350, height: 100)
+                            .background(buttonClicked ? Color.gray.opacity(0.8) : Color.red)
+                            .foregroundStyle(.white)
+                            .cornerRadius(40)
+                    }
+                    .disabled(buttonClicked)
+
+                    HStack {
+                        Button(action: {
+                            numberOfQuestions = 10
+                            buttonClicked = true
+                        }) {
+                            Text("10")
+                                .font(.largeTitle)
+                                .frame(width: 175, height: 100)
+                                .background(buttonClicked ? Color.gray.opacity(0.8) : Color.yellow)
+                                .foregroundStyle(.white)
+                                .cornerRadius(40)
+                        }
+                        .disabled(buttonClicked)
+                        Button(action: {
+                            numberOfQuestions = 5
+                            buttonClicked = true
+                        }) {
+                            Text("5")
+                                .font(.largeTitle)
+                                .frame(width: 175, height: 100)
+                                .background(buttonClicked ? Color.gray.opacity(0.8) : Color.green)
+                                .foregroundStyle(.white)
+                                .cornerRadius(40)
+                        }
+                        .disabled(buttonClicked)
+                    }
+                }
+                
+                NavigationLink(destination: PracticeMode(
+                    mode: $mode,
+                    numberOfQuestions: $numberOfQuestions,
+                    selectedMultiplication: $selectedMultiplication
+                )) {
+                    Text("Begin")
+                        .font(.largeTitle)
+                        .frame(width: 350, height: 100)
+                        .background(buttonClicked ? Color.blue : Color.gray.opacity(0.8))
+                        .foregroundStyle(.white)
                         .cornerRadius(40)
                 }
-                .disabled(numberQuestionsDisabled10)
-                
-                Button(action: {
-                    numberOfQuestions = 5
-                    
-                    numberQuestionsDisabled20 = true
-                    numberQuestionsDisabled10 = true
-                }) {
-                    Text("5")
-                        .font(.largeTitle)
-                        .frame(width: 175, height: 100)
-                        .background(Color.green)
-                        .foregroundColor(.white)
-                        .cornerRadius(40)
-                }
-                .disabled(numberQuestionsDisabled5)
-                
+                .disabled(!buttonClicked)
             }
         }
+        
     }
 }

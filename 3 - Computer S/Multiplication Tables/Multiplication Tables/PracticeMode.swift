@@ -16,62 +16,80 @@ enum Mode {
 struct PracticeMode: View {
     @State var buttonClicked: Bool = false 
     @Binding var mode: Mode
-    @State var numberOfQuestions: Int = 5
-    @State var selectedMultiplication: Int = 2
+    @Binding var numberOfQuestions: Int
+    @Binding var selectedMultiplication: Int
     
     var body: some View {
-        VStack {
-            Button(action: {
-                buttonClicked = true
-                mode = .medium
-            }) {
-                Text("Medium")
-                    .font(.largeTitle)
-                    .frame(width: 350, height: 100)
-                    .background(!buttonClicked ? Color.yellow : Color.gray.opacity(0.8))
-                    .foregroundColor(!buttonClicked ? Color.white : Color.gray.opacity(0.8))
-                    .cornerRadius(40)
-            }
-            .disabled(buttonClicked)
-            
-            HStack {
+        ZStack {
+            Color(red: 0.0, green: 0.2, blue: 0.0)
+                .ignoresSafeArea()
+            VStack {
+                Spacer()
+                ZStack {
+                    Rectangle()
+                        .frame(width: 300, height: 150)
+                        .cornerRadius(10)
+                        .foregroundStyle(.black)
+                    
+                    Rectangle()
+                        .frame(width: 250, height: 100)
+                        .cornerRadius(10)
+                        .foregroundStyle(.green)
+                    Text("select difficulty")
+                        .font(.largeTitle)
+                }
+                Spacer()
                 Button(action: {
                     buttonClicked = true
-                    mode = .easy
+                    mode = .medium
                 }) {
-                    Text("Easy")
+                    Text("Medium")
                         .font(.largeTitle)
-                        .frame(width: 175, height: 100)
-                        .background(!buttonClicked ? Color.green : Color.gray.opacity(0.8))
-                        .foregroundColor(!buttonClicked ? Color.white : Color.gray.opacity(0.8))
+                        .frame(width: 350, height: 100)
+                        .background(!buttonClicked ? Color.yellow : Color.gray.opacity(0.8))
+                        .foregroundColor(.white)
                         .cornerRadius(40)
                 }
                 .disabled(buttonClicked)
                 
-                Button(action: {
-                    buttonClicked = true
-                    mode = .hard
-                }) {
-                    Text("Hard")
+                HStack {
+                    Button(action: {
+                        buttonClicked = true
+                        mode = .easy
+                    }) {
+                        Text("Easy")
+                            .font(.largeTitle)
+                            .frame(width: 175, height: 100)
+                            .background(!buttonClicked ? Color.green : Color.gray.opacity(0.8))
+                            .foregroundColor(.white)
+                            .cornerRadius(40)
+                    }
+                    .disabled(buttonClicked)
+                    
+                    Button(action: {
+                        buttonClicked = true
+                        mode = .hard
+                    }) {
+                        Text("Hard")
+                            .font(.largeTitle)
+                            .frame(width: 175, height: 100)
+                            .background(!buttonClicked ? Color.red : Color.gray.opacity(0.8))
+                            .foregroundColor(.white)
+                            .cornerRadius(40)
+                    }
+                    .disabled(buttonClicked)
+                }
+                NavigationLink(destination: Questions(mode: $mode, numberOfQuestions: $numberOfQuestions, selectedMultiplication: $selectedMultiplication)) {
+                    Text("Next")
                         .font(.largeTitle)
-                        .frame(width: 175, height: 100)
-                        .background(!buttonClicked ? Color.red : Color.gray.opacity(0.8))
-                        .foregroundColor(!buttonClicked ? Color.white : Color.gray.opacity(0.8))
+                        .frame(width: 350, height: 100)
+                        .background(buttonClicked ? Color.blue : Color.gray.opacity(0.8))
+                        .foregroundColor(.white)
                         .cornerRadius(40)
                 }
-                .disabled(buttonClicked)
+                .disabled(!buttonClicked)
             }
         }
-        NavigationLink(destination: Questions(mode: $mode, numberOfQuestions: $numberOfQuestions, selectedMultiplication: $selectedMultiplication)) {
-            Text("Begain")
-                .font(.largeTitle)
-                .frame(width: 350, height: 100)
-                .background(buttonClicked ? Color.blue : Color.gray.opacity(0.8))
-                .foregroundColor(buttonClicked ? Color.white : Color.gray.opacity(0.8))
-                .cornerRadius(40)
-        }
-        .disabled(!buttonClicked)
     }
 }
-
 

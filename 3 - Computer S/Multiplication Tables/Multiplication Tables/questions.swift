@@ -14,6 +14,11 @@ struct Questions: View {
     @State var B: Int = 0
     @State var C: Int = 0
     @State var D: Int = 0
+    @State var correctAnswerCount: Int = 0
+    
+    
+    @State var resultMessage: String = ""
+    @State var resultMessageColor: Color = .clear
     
     @State var questionsIndex: Int = 0
     @State var practiceQuestionsRandomNumbers: [Int] = []
@@ -22,25 +27,17 @@ struct Questions: View {
     @Binding var numberOfQuestions: Int
     @Binding var selectedMultiplication: Int
     
+    
     func generateRandomNumbers() {
         let range: ClosedRange<Int>
         
         switch mode {
-        case .easy: range = 1...26
-        case .medium: range = 21...43
-        case .hard: range = 41...89
+        case .easy: range = 1...20
+        case .medium: range = 11...30
+        case .hard: range = 21...40
         }
         
-        var numbers = Set<Int>()
-        let questionCount = min(numberOfQuestions, range.count)
-        
-        while numbers.count < questionCount {
-            numbers.insert(Int.random(in: range))
-        }
-        
-        var number = Array(numbers)
-        number.shuffle()
-        practiceQuestionsRandomNumbers = number
+        practiceQuestionsRandomNumbers = Array(range.shuffled().prefix(numberOfQuestions))
     }
     
     func getAnswer(selectedMultiplication: Int, practiceQuestionsRandomNumber: Int) -> Int {
@@ -55,19 +52,19 @@ struct Questions: View {
             practiceQuestionsRandomNumber: practiceQuestionsRandomNumbers[questionsIndex]
         )
         
-        var answers = Set<Int>()
-        
-        let lowerBound = max(1, answer - 20)
-        let upperBound = answer + 20
-        
-        while answers.count < 3 {
-            let randomAnswer = Int.random(in: lowerBound...upperBound)
-            if randomAnswer != answer {
-                answers.insert(randomAnswer)
-            }
+        let range: ClosedRange<Int>
+        switch mode {
+        case .easy: range = 1...20
+        case .medium: range = 11...30
+        case .hard: range = 21...40
         }
-        
-        var finalAnswers = Array(answers)
+
+        let incorrectAnswers = range
+            .map { selectedMultiplication * $0 }
+            .filter { $0 != answer }
+            .shuffled()
+
+        var finalAnswers = Array(incorrectAnswers.prefix(3))
         finalAnswers.append(answer)
         finalAnswers.shuffle()
         
@@ -78,96 +75,194 @@ struct Questions: View {
     }
     
     var body: some View {
-        VStack {
-            Spacer()
-            if questionsIndex < practiceQuestionsRandomNumbers.count {
-                Text("\(selectedMultiplication) X \(practiceQuestionsRandomNumbers[questionsIndex])")
-                    .font(.largeTitle)
-                    .padding()
-                
+        ZStack {
+            Color(red: 0.0, green: 0.2, blue: 0.0)
+                .ignoresSafeArea()
+            VStack {
                 Spacer()
-                Spacer()
-                Spacer()
-                Spacer()
-                Spacer()
-                
-                VStack(spacing: 5) {
-                    HStack(spacing: 5) {
-                        Button(action: {
-                            buttonClicked = true
+                if questionsIndex < practiceQuestionsRandomNumbers.count {
+                    ZStack {
+                        Rectangle()
+                            .frame(width: 200, height: 150)
+                            .cornerRadius(10)
+                            .foregroundStyle(.black)
                         
-                        }) {
-                            Text("\(A)")
-                                .font(.largeTitle)
-                                .frame(width: 175, height: 100)
-                                .background(!buttonClicked ? Color.red : Color.gray.opacity(0.8))
-                                .foregroundColor(!buttonClicked ? Color.white : Color.gray.opacity(0.8))
-                                .cornerRadius(40)
-                        }
-                        .disabled(buttonClicked)
-                        
-                        Button(action: { buttonClicked = true }) {
-                            Text("\(B)")
-                                .font(.largeTitle)
-                                .frame(width: 175, height: 100)
-                                .background(!buttonClicked ? Color.blue : Color.gray.opacity(0.8))
-                                .foregroundColor(!buttonClicked ? Color.white : Color.gray.opacity(0.8))
-                                .cornerRadius(40)
-                        }
-                        .disabled(buttonClicked)
-                    }
-                    
-                    HStack(spacing: 5) {
-                        Button(action: { buttonClicked = true }) {
-                            Text("\(C)")
-                                .font(.largeTitle)
-                                .frame(width: 175, height: 100)
-                                .background(!buttonClicked ? Color.yellow : Color.gray.opacity(0.8))
-                                .foregroundColor(!buttonClicked ? Color.white : Color.gray.opacity(0.8))
-                                .cornerRadius(40)
-                        }
-                        .disabled(buttonClicked)
-                        
-                        Button(action: { buttonClicked = true }) {
-                            Text("\(D)")
-                                .font(.largeTitle)
-                                .frame(width: 175, height: 100)
-                                .background(!buttonClicked ? Color.green : Color.gray.opacity(0.8))
-                                .foregroundColor(!buttonClicked ? Color.white : Color.gray.opacity(0.8))
-                                .cornerRadius(40)
-                        }
-                        .disabled(buttonClicked)
-                    }
-                    
-                    Button(action: {
-                        questionsIndex += 1
-                        buttonClicked = false
-                        
-                        if questionsIndex < practiceQuestionsRandomNumbers.count {
-                            generateButtonAnswers()
-                        }
-                    }) {
-                        Text("Next Question")
+                        Rectangle()
+                            .frame(width: 150, height: 100)
+                            .cornerRadius(10)
+                            .foregroundStyle(.green)
+                        Text("\(selectedMultiplication) X \(practiceQuestionsRandomNumbers[questionsIndex])")
                             .font(.largeTitle)
-                            .frame(width: 350, height: 100)
-                            .background(buttonClicked ? Color.blue : Color.gray.opacity(0.8))
-                            .foregroundColor(buttonClicked ? Color.white : Color.gray.opacity(0.8))
-                            .cornerRadius(40)
+                            .padding()
                     }
-                    .padding(.top)
-                    .disabled(!buttonClicked)
+                    
+                    Spacer()
+                    Spacer()
+                    Text(resultMessage)
+                        .foregroundStyle(resultMessageColor)
+                        .font(.largeTitle)
+                    Spacer()
+                    Spacer()
+                    Spacer()
+                    
+                    VStack(spacing: 5) {
+                        HStack(spacing: 5) {
+                            Button(action: {
+                                guard !buttonClicked,
+                                      questionsIndex < practiceQuestionsRandomNumbers.count else { return }
+                                buttonClicked = true
+                                if A == getAnswer(
+                                    selectedMultiplication: selectedMultiplication,
+                                    practiceQuestionsRandomNumber: practiceQuestionsRandomNumbers[questionsIndex]) {
+                                    resultMessage = "Correct!!!"
+                                    resultMessageColor = .green
+                                    correctAnswerCount += 1
+                                } else {
+                                    resultMessage = "Incorrect!!!"
+                                    resultMessageColor = .red
+                                }
+                                
+                            }) {
+                                Text("\(A)")
+                                    .font(.largeTitle)
+                                    .frame(width: 175, height: 100)
+                                    .background(!buttonClicked ? Color.red : Color.gray.opacity(0.8))
+                                    .foregroundColor(.white)
+                                    .cornerRadius(40)
+                            }
+                            .disabled(buttonClicked)
+                            
+                            Button(action: {
+                                guard !buttonClicked,
+                                      questionsIndex < practiceQuestionsRandomNumbers.count else { return }
+                                buttonClicked = true
+                                if B == getAnswer(
+                                    selectedMultiplication: selectedMultiplication,
+                                    practiceQuestionsRandomNumber: practiceQuestionsRandomNumbers[questionsIndex]) {
+                                    resultMessage = "Correct!!!"
+                                    resultMessageColor = .green
+                                    correctAnswerCount += 1
+                                } else {
+                                    resultMessage = "Incorrect!!!"
+                                    resultMessageColor = .red
+                                }
+                                
+                            }) {
+                                Text("\(B)")
+                                    .font(.largeTitle)
+                                    .frame(width: 175, height: 100)
+                                    .background(!buttonClicked ? Color.blue : Color.gray.opacity(0.8))
+                                    .foregroundColor(.white)
+                                    .cornerRadius(40)
+                            }
+                            .disabled(buttonClicked)
+                        }
+                        
+                        HStack(spacing: 5) {
+                            Button(action: {
+                                guard !buttonClicked,
+                                      questionsIndex < practiceQuestionsRandomNumbers.count else { return }
+                                buttonClicked = true
+                                if C == getAnswer(
+                                    selectedMultiplication: selectedMultiplication,
+                                    practiceQuestionsRandomNumber: practiceQuestionsRandomNumbers[questionsIndex]) {
+                                    resultMessage = "Correct!!!"
+                                    resultMessageColor = .green
+                                    correctAnswerCount += 1
+                                } else {
+                                    resultMessage = "Incorrect!!!"
+                                    resultMessageColor = .red
+                                }
+                                
+                            }) {
+                                Text("\(C)")
+                                    .font(.largeTitle)
+                                    .frame(width: 175, height: 100)
+                                    .background(!buttonClicked ? Color.yellow : Color.gray.opacity(0.8))
+                                    .foregroundColor(.white)
+                                    .cornerRadius(40)
+                            }
+                            .disabled(buttonClicked)
+                            
+                            Button(action: {
+                                guard !buttonClicked,
+                                      questionsIndex < practiceQuestionsRandomNumbers.count else { return }
+                                buttonClicked = true
+                                if D == getAnswer(
+                                    selectedMultiplication: selectedMultiplication,
+                                    practiceQuestionsRandomNumber: practiceQuestionsRandomNumbers[questionsIndex]) {
+                                    resultMessage = "Correct!!!"
+                                    resultMessageColor = .green
+                                    correctAnswerCount += 1
+                                } else {
+                                    resultMessage = "Incorrect!!!"
+                                    resultMessageColor = .red
+                                }
+                                
+                            }) {
+                                Text("\(D)")
+                                    .font(.largeTitle)
+                                    .frame(width: 175, height: 100)
+                                    .background(!buttonClicked ? Color.green : Color.gray.opacity(0.8))
+                                    .foregroundColor(.white)
+                                    .cornerRadius(40)
+                            }
+                            .disabled(buttonClicked)
+                        }
+                        
+                        Button(action: {
+                            guard buttonClicked,
+                                  questionsIndex < practiceQuestionsRandomNumbers.count else { return }
+                            questionsIndex += 1
+                            buttonClicked = false
+                            resultMessage = ""
+                            resultMessageColor = .clear
+                            
+                            if questionsIndex < practiceQuestionsRandomNumbers.count {
+                                generateButtonAnswers()
+                            }
+                        }) {
+                            Text("Next Question")
+                                .font(.largeTitle)
+                                .frame(width: 350, height: 100)
+                                .background(buttonClicked ? Color.blue : Color.gray.opacity(0.8))
+                                .foregroundColor(.white)
+                                .cornerRadius(40)
+                        }
+                        .padding(.top)
+                        .disabled(!buttonClicked)
+                    }
+                } else {
+                    ZStack {
+                        Rectangle()
+                            .frame(width: 200, height: 150)
+                            .cornerRadius(10)
+                            .foregroundStyle(.black)
+                        
+                        Rectangle()
+                            .frame(width: 150, height: 100)
+                            .cornerRadius(10)
+                            .foregroundStyle(.green)
+                        Text("""
+SCORE:
+  \(correctAnswerCount) / \( numberOfQuestions)
+""")
+                        .font(.largeTitle)
+                    }
+                    Spacer()
                 }
-            } else {
-                Text("Game Over!")
-                    .font(.largeTitle)
             }
-        }
-        .navigationBarBackButtonHidden(true)
-        .onAppear {
-            questionsIndex = 0
-            generateRandomNumbers()
-            if !practiceQuestionsRandomNumbers.isEmpty {
-                generateButtonAnswers()
+            .navigationBarBackButtonHidden(true)
+            .onAppear {
+                buttonClicked = false
+                correctAnswerCount = 0
+                resultMessage = ""
+                resultMessageColor = .clear
+                questionsIndex = 0
+                generateRandomNumbers()
+                if !practiceQuestionsRandomNumbers.isEmpty {
+                    generateButtonAnswers()
+                }
             }
         }
     }

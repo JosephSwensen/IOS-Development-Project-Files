@@ -8,58 +8,49 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var numberOfQuestions: Int = 5
     @State var selectedMultiplication: Int = 2
-    @State var mode: Mode = .easy
     
     var body: some View {
-        VStack {
-            NavigationStack {
-                ZStack {
-                    Rectangle()
-                        .frame(width: 300, height: 150)
-                        .cornerRadius(10)
-                        .foregroundStyle(.black)
-                    Rectangle()
-                        .frame(width: 250, height: 100)
-                        .cornerRadius(10)
-                        .foregroundStyle(.green)
-                    Text("""
-Multiplication 
-      Practice
-""")
-                        .font(.largeTitle)
-                }
+        NavigationStack {
+            ZStack {
+                Color(red: 0.0, green: 0.2, blue: 0.0)
+                    .ignoresSafeArea()
                 
-                Spacer()
-                
-                NavigationLink("test") {
-                    SelectMultiplecation(selectedMultiplication: $selectedMultiplication)
+                VStack {
+                    Spacer()
                     
-                    NavigationStack {
-                        NavigationLink("next") {
-                            NumberOfQuestions(numberOfQuestions: $numberOfQuestions)
-                            NavigationStack {
-                                NavigationLink(destination: PracticeMode(mode: $mode)) {
-                                    Text("Next Question")
-                                        .font(.largeTitle)
-                                        .frame(width: 350, height: 100)
-                                        .background(Color.blue)
-                                        .foregroundColor(.white)
-                                        .cornerRadius(40)
-                                }
-                                
-                            }
-                        }
+                    ZStack {
+                        Rectangle()
+                            .frame(width: 300, height: 150)
+                            .cornerRadius(10)
+                            .foregroundStyle(.black)
+                        
+                        Rectangle()
+                            .frame(width: 250, height: 100)
+                            .cornerRadius(10)
+                            .foregroundStyle(.green)
+                        
+                        Text("Multiplication\n  Practice")
+                            .font(.largeTitle)
+                            .foregroundColor(.white)
                     }
                     
+                    Spacer()
+                    
+                    NavigationLink(destination: SelectMultiplecation(selectedMultiplication: $selectedMultiplication)) {
+                        Text("Start")
+                            .font(.largeTitle)
+                            .frame(width: 350, height: 100)
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(40)
+                    }
+                    .padding()
                 }
-                
             }
         }
     }
 }
-
 #Preview {
     ContentView()
 }
