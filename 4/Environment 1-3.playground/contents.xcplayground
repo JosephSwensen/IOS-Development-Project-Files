@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='ios' display-mode='rendered' executeOnSourceChanges='true'>
+    <pages>
+        <page name='1. Exercise - Reading the Color Scheme'/>
+        <page name='2. App Exercise - Leaving the Workout Screens'/>
+        <page name='3. Exercise - Setting a Value for Part of the Screen'/>
+        <page name='4. Exercise - Removing the Middlemen'/>
+        <page name='5. App Exercise - Sharing the Step Tracker'/>
+        <page name='6. Exercise - Your Own Environment Value'/>
+        <page name='7. Exercise - Editing a Shared Object'/>
+        <page name='8. App Exercise - Picking the Path'/>
+        <page name='9. Black Diamond - A Control That Knows When It Is Off'/>
+    </pages>
+</playground>
