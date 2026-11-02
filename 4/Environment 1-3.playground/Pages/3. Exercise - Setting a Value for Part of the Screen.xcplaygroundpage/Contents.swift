@@ -26,14 +26,18 @@ struct SchemeTestView: View {
     var body: some View {
         VStack(spacing: 20) {
             SchemeLabel(labelNumber: 1)
+                .environment(\.colorScheme, .light)
             HStack {
                 SchemeLabel(labelNumber: 2)
                 SchemeLabel(labelNumber: 3)
             }
+            
             VStack {
                 SchemeLabel(labelNumber: 4)
             }
+            
         }
+        .environment(\.colorScheme, .dark)
         .frame(width: 320, height: 480)
     }
 }
@@ -50,7 +54,7 @@ PlaygroundPage.current.setLiveView(SchemeTestView())
 
  In a comment below, explain why label 1 is light even though the `VStack` around it is set to dark.
  */
-
+// because what ever is closest take priority
 
 
 

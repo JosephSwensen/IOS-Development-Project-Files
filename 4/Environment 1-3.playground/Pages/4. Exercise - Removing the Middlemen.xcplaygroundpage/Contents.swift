@@ -26,15 +26,16 @@ struct BakeryScreen: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            OrderTotalLabel(order: order)
-            MenuSection(order: order)
+            OrderTotalLabel()
+            MenuSection()
         }
+        .environment(order)
         .frame(width: 320, height: 480)
     }
 }
 
 struct OrderTotalLabel: View {
-    let order: BakeryOrder
+    @Environment(BakeryOrder.self) private var order
 
     var body: some View {
         Text("Cupcakes in your order: \(order.cupcakeCount)")
@@ -43,30 +44,28 @@ struct OrderTotalLabel: View {
 }
 
 struct MenuSection: View {
-    let order: BakeryOrder
 
     var body: some View {
         VStack {
             Text("Menu")
                 .font(.title)
-            CupcakeRow(order: order)
+            CupcakeRow()
         }
     }
 }
 
 struct CupcakeRow: View {
-    let order: BakeryOrder
 
     var body: some View {
         HStack {
             Text("Chocolate cupcake")
-            AddCupcakeButton(order: order)
+            AddCupcakeButton()
         }
     }
 }
 
 struct AddCupcakeButton: View {
-    let order: BakeryOrder
+    @Environment(BakeryOrder.self) private var order
 
     var body: some View {
         Button("Add a cupcake") {
@@ -88,7 +87,7 @@ PlaygroundPage.current.setLiveView(BakeryScreen())
 
  Now comment out `.environment(order)` and run the page. Write the error message in a comment below, and explain in your own words what went wrong. Then put `.environment(order)` back.
  */
-
+//
 
 
 

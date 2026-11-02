@@ -28,14 +28,58 @@ class StepService {
 }
 
 struct FitnessHomeScreen: View {
+    @State private var tracker = StepTracker()
+    @State private var service = StepService()
 
     var body: some View {
         VStack(spacing: 20) {
             Text("Today")
                 .font(.largeTitle)
 
+            StepCountLabel()
+            ButtonsSection()
         }
+        .environment(tracker)
+        .environment(service)
         .frame(width: 320, height: 480)
+    }
+}
+
+struct StepCountLabel: View {
+    @Environment(StepTracker.self) private var tracker
+
+    var body: some View {
+        Text("\(tracker.steps) of \(tracker.goal) steps")
+    }
+}
+
+struct AddWalkButton: View {
+    @Environment(StepTracker.self) private var tracker
+
+    var body: some View {
+        Button("Add a walk") {
+            tracker.addSteps(1000)
+        }
+    }
+}
+
+struct SyncButton: View {
+    @Environment(StepTracker.self) private var tracker
+    @Environment(StepService.self) private var service
+
+    var body: some View {
+        Button("Sync watch") {
+            tracker.addSteps(service.stepsFromWatch())
+        }
+    }
+}
+
+struct ButtonsSection: View {
+    var body: some View {
+        HStack {
+            AddWalkButton()
+            SyncButton()
+        }
     }
 }
 
@@ -56,6 +100,9 @@ PlaygroundPage.current.setLiveView(FitnessHomeScreen())
  In an app, you'd check `StepCountLabel` by itself with a `#Preview`. In a playground, the `setLiveView` line at the bottom does the same job. Change it so it shows only `StepCountLabel()`. Run the page and write the error in a comment below.
  */
 
+// I expect an error because the label has no StepTracker.
+// It needs a StepTracker to show the steps.
+
 
 
 
@@ -65,6 +112,7 @@ PlaygroundPage.current.setLiveView(FitnessHomeScreen())
 
  When it works, copy your finished `setLiveView` line into a comment below. Then change the line back so it shows `FitnessHomeScreen()`.
  */
+//PlaygroundPage.current.setLiveView(StepCountLabel().environment(StepTracker()).environment(\.colorScheme, .dark))
 
 
 
