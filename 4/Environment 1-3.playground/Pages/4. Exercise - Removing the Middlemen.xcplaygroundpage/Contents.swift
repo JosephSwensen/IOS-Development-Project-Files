@@ -87,7 +87,7 @@ PlaygroundPage.current.setLiveView(BakeryScreen())
 
  Now comment out `.environment(order)` and run the page. Write the error message in a comment below, and explain in your own words what went wrong. Then put `.environment(order)` back.
  */
-//
+// OrderTotalLabel() and MenuSection() no longer look at order
 
 
 

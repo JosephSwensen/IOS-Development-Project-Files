@@ -25,10 +25,6 @@ class StepTracker {
     }
 }
 
-extension EnvironmentValues {
-    @Entry var workoutTitle: String = ""
-}
-
 struct GoalsScreen: View {
     @State private var tracker = StepTracker()
     @State private var dailyGoal = 10000
@@ -37,50 +33,48 @@ struct GoalsScreen: View {
         VStack(spacing: 20) {
             Text("Daily goal: \(dailyGoal)")
                 .font(.headline)
-            GoalStepper()
-            WorkoutTitleRow()
-                .environment(\.workoutTitle, "Morning Run")
-            TodaySection(tracker: tracker)
+            GoalStepper(goal: $dailyGoal)
+            WorkoutTitleRow(workoutTitle: "Morning Run")
+            TodaySection()
         }
+        .environment(tracker)
         .padding()
         .frame(width: 320, height: 480)
     }
 }
 
-// Problem 1
+// Binding: The stepper changes the parents goal.
 struct GoalStepper: View {
-    @State private var goal = 10000
+    @Binding var goal: Int
 
     var body: some View {
         Stepper("Goal: \(goal)", value: $goal, in: 1000...30000, step: 1000)
     }
 }
 
-// Problem 2
+// Initializer: Only this view needs to read the title.
 struct WorkoutTitleRow: View {
-    @Environment(\.workoutTitle) private var workoutTitle
+    let workoutTitle: String
 
     var body: some View {
         Text("Next workout: \(workoutTitle)")
     }
 }
 
-// Problem 3
+// Environment: Both views can get the step tracker
 struct TodaySection: View {
-    let tracker: StepTracker
-
     var body: some View {
         VStack {
             Text("Today")
                 .font(.title)
-            TodayStepsLabel(tracker: tracker)
-            AddStepsButton(tracker: tracker)
+            TodayStepsLabel()
+            AddStepsButton()
         }
     }
 }
 
 struct TodayStepsLabel: View {
-    let tracker: StepTracker
+    @Environment(StepTracker.self) private var tracker
 
     var body: some View {
         Text("Steps: \(tracker.steps)")
@@ -88,7 +82,7 @@ struct TodayStepsLabel: View {
 }
 
 struct AddStepsButton: View {
-    let tracker: StepTracker
+    @Environment(StepTracker.self) private var tracker
 
     var body: some View {
         Button("Add 500 steps") {

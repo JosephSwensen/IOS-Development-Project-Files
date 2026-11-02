@@ -45,11 +45,20 @@ struct PlaylistEditor: View {
     @Environment(PlaylistSettings.self) private var settings
 
     var body: some View {
+        @Bindable var settings = settings
         VStack {
-            TextField("Playlist name", text: .constant(""))
+            TextField("Playlist name", text: $settings.playlistName)
                 .textFieldStyle(.roundedBorder)
-            Toggle("Shuffle", isOn: .constant(false))
+            Toggle("Shuffle", isOn: $settings.shuffleOn)
         }
+    }
+}
+
+struct PlaylistEditorFromInit: View {
+    @Bindable var settings: PlaylistSettings
+    
+    var body: some View {
+        TextField("", text: $settings.playlistName)
     }
 }
 
@@ -67,12 +76,12 @@ PlaygroundPage.current.setLiveView(PlaylistScreen())
  Run the page. Typing in either text field should change the header and the other text field.
  */
 
-
+// can not find $settings in scope
 
 
 
 //:  In a comment below, explain why `@Bindable` goes inside `body` in `PlaylistEditor`, but on the property in `PlaylistEditorFromInit`.
-
+// because @Environment needs to run before and they are the same name is they can not be by each other.
 
 
 

@@ -10,13 +10,18 @@
 import SwiftUI
 import PlaygroundSupport
 
+extension EnvironmentValues {
+    @Entry var tagColor: Color = .orange
+}
+
 struct RecipeTag: View {
+    @Environment(\.tagColor) private var tagColor
     let tagName: String
 
     var body: some View {
         Text(tagName)
             .padding(8)
-            .background(Color.gray)
+            .background(tagColor)
             .clipShape(.capsule)
     }
 }
@@ -30,12 +35,14 @@ struct RecipeBookView: View {
                 RecipeTag(tagName: "Pasta")
                 RecipeTag(tagName: "Salad")
             }
+            .environment(\.tagColor, .green)
             Text("Desserts")
                 .font(.headline)
             HStack {
                 RecipeTag(tagName: "Brownies")
                 RecipeTag(tagName: "Pie")
             }
+            .environment(\.tagColor, .pink)
             Text("Everything Else")
                 .font(.headline)
             RecipeTag(tagName: "Leftovers")
@@ -58,13 +65,13 @@ PlaygroundPage.current.setLiveView(RecipeBookView())
 
  Change the default in your `@Entry` line from `.gray` to `.orange` and run the page again. In a comment below, say which tags changed color and why the others did not.
  */
-
+// the Leftovers was the only one to change because we did add .environment to set it to a certain color so it used @Entry defualt color.
 
 
 
 
 //:  `tagColor` is one simple value with a default. In a comment below, explain why `@Entry` is a better fit for it than an `@Observable` class shared with `.environment`.
-
+// becasue you dont have to manage every single thing you can just cange it in @Entry and it will change every where
 
 
 
