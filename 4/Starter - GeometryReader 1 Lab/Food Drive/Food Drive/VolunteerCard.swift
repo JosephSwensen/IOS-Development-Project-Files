@@ -7,16 +7,16 @@
 import SwiftUI
 
 struct VolunteerCard: View {
-    let name: Volunteer
-    let description: Volunteer
-    let systemImage: Volunteer
+    let name: String
+    let description: String
+    let systemImage: String
     
     var body: some View {
         VStack {
-            Image(systemName: systemImage.systemImage)
-            Text(name.name)
+            Image(systemName: systemImage)
+            Text(name)
                 .font(.headline)
-            Text(description.description)
+            Text(description)
                 .font(.caption)
         }
         .frame(maxWidth: .infinity)
