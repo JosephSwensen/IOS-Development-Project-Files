@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @State private var mainRouter = MainRouter()
-    @State private var dragonsRouter = DragonsRouter()
+    @State var mainRouter = MainRouter()
+    @State var dragonsRouter = DragonsRouter()
 
     var body: some View {
         TabView(selection: $mainRouter.selectedTab) {

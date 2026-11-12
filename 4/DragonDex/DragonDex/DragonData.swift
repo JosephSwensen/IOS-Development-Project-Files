@@ -51,7 +51,7 @@ struct Rider: Identifiable {
     let dragon: Dragon
 }
 
-// Placeholder samples: replace with the assignment's rider data when supplied.
+
 let riders: [Rider] = zip(["Aria", "Finn", "Rowan", "Luna"], dragons).map { name, dragon in
     Rider(id: name, name: name, dragon: dragon)
 }
