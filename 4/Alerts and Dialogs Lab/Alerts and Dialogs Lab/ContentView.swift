@@ -102,7 +102,7 @@ struct ContentView: View {
                     button3Show = true
                 }
             }
-            .alert("Error: \(button3Error)", isPresented: $button3Show) {
+            .alert("Error: \(button3Error.errorDescription)", isPresented: $button3Show) {
                 
             } message: {
                 Text(button3Error.errorDescription)
@@ -130,14 +130,14 @@ struct ContentView: View {
                 button5Show = true
             }
             .confirmationDialog("Hello", isPresented: $button5Show, titleVisibility: .visible) {
+                Button("Cancel", role: .cancel) {
+                    
+                }
                 
                 Button("Delete", role: .destructive) {
                     
                 }
                 
-                Button("Cancel", role: .cancel) {
-                    
-                }
                 
             } message: {
                 Text("My name is Joey")
