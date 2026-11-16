@@ -10,6 +10,7 @@ struct NoteCard: View {
     var isSelected: Bool
     var onSelect: () -> Void
     var onDelete: () -> Void
+    @GestureState var dragOffset = CGSize.zero
     
     @State var isPressing = false
 
@@ -29,6 +30,26 @@ struct NoteCard: View {
                     .transition(.scale)
             }
         }
+        .offset(x: note.offset.width + dragOffset.width, y: note.offset.height + dragOffset.height)
+        
+        .gesture(
+            DragGesture()
+                .updating($dragOffset) { value, state, _ in
+                    state = value.translation
+                }
+        
+                .onEnded { value in
+
+                    if abs(value.translation.width) > 300 {
+                        withAnimation {
+                           onDelete()
+                        }
+                    } else {
+                        note.offset.width += value.translation.width
+                        note.offset.height += value.translation.height
+                    }
+                }
+        )
         .onTapGesture {
             onSelect()
         }
@@ -48,6 +69,7 @@ struct NoteCard: View {
         .scaleEffect(isPressing ? 0.9 : 1)
         .opacity(isPressing ? 0.6 : 1)
         .animation(.easeInOut, value: isPressing)
+        .animation(.bouncy, value: dragOffset)
     }
 }
 
