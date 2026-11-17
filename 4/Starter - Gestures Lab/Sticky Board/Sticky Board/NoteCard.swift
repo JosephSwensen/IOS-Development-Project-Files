@@ -36,11 +36,12 @@ struct NoteCard: View {
             DragGesture()
                 .updating($dragOffset) { value, state, _ in
                     state = value.translation
+                    print(value.translation)
                 }
         
                 .onEnded { value in
 
-                    if abs(value.translation.width) > 300 {
+                    if abs(value.translation.height) > 300 {
                         withAnimation {
                            onDelete()
                         }
