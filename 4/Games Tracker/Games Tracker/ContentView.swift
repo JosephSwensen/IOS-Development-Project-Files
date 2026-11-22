@@ -7,50 +7,24 @@
 
 import SwiftUI
 
-@Observable
-class viewModel: Identifiable {
-    
-    var games: [String] = ["Solos", "Duos", "Trios", "Squads"]
-
-    var solos: [String] = []
-
-    var duos: [String] = []
-    
-    var trios: [String] = []
-    
-    var squads: [String] = []
-    
-    var winners: [String] = [""]
-    
-    var sheetIsShowing: Bool = false
-    var newGameTitle: String = ""
-    var sortBy:[String] = ["Wins", "Kills"]
-    var sortOption: String = "Wins"
-    
-    var sortWhoWins:[String] = ["s", "g"]
-    var sortWhoWinsOption: String = "s"
-    
-    var showAddPlayerAlert: Bool = false
-    var textBox: String = ""
-    var playerList: [String] = []
-    
-    var isSaveAlert: Bool = false
-    
-    
-}
-
 struct ContentView: View {
-    @State var gameInfo: viewModel = viewModel()
+    @State private var gameInfo = GamesViewModel()
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(gameInfo.games, id: \.self) {
-                    game in
-                    HStack {
-                        Text(game)
-                        Spacer()
-                        Text("Current Winner: ")
+                ForEach($gameInfo.games) { $game in
+                    NavigationLink(destination: GameView(game: $game)) {
+                        HStack {
+                            Text(game.title)
+                            Spacer()
+                            if let winner = game.players.first?.name {
+                                Text("Current Winner: \( game.players.first!.name) ")
+                            } else {
+                                Text("Add players")
+                            }
+                            
+                        }
                     }
                 }
             }
@@ -110,25 +84,17 @@ struct ContentView: View {
                             TextField("Type Your Name", text: $gameInfo.textBox)
                             
                             Button("Save") {
-                                gameInfo.playerList.append(gameInfo.textBox)
+                                gameInfo.addPlayer()
                             }
                             Button("Cancel", role: .cancel) {
-                                gameInfo.showAddPlayerAlert = false
-                                gameInfo.textBox = ""
+                                gameInfo.cancelAddingPlayer()
                             }
                         }
                         
                         .toolbar {
                             ToolbarItem(placement: .navigationBarLeading) {
                                 Button("Save") {
-                                    if gameInfo.newGameTitle == "" {
-                                        gameInfo.isSaveAlert = true
-                                    } else {
-                                        gameInfo.games.append(gameInfo.newGameTitle)
-                                        gameInfo.sheetIsShowing = false
-                                        gameInfo.playerList = []
-                                        gameInfo.newGameTitle = ""
-                                    }
+                                    gameInfo.saveGame()
                                 }
                                 .alert("You have to enter a game name to save", isPresented: $gameInfo.isSaveAlert) {
                                     
