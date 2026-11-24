@@ -1,7 +1,5 @@
 import Observation
 
-
-
 @Observable
 class GamesViewModel {
     var games: [Game] = [
@@ -17,18 +15,12 @@ class GamesViewModel {
     var sortOption = "Highest total"
     let sortWhoWins = ["Highest total", "Lowest total"]
     var sortWhoWinsOption = "Highest total"
-    var showAddPlayerAlert = false
-    var textBox = ""
-    var playerList: [String] = []
+    var showAddPlayerSheet = false
+    var playerList: [Player] = []
     var isSaveAlert = false
 
-    func addPlayer() {
-        playerList.append(textBox)
-    }
-
-    func cancelAddingPlayer() {
-        showAddPlayerAlert = false
-        textBox = ""
+    func addPlayer(_ player: Player) {
+        playerList.append(player)
     }
 
     func saveGame() {
@@ -39,7 +31,7 @@ class GamesViewModel {
 
         games.append(Game(
             title: newGameTitle,
-            players: playerList.map { Player(name: $0) },
+            players: playerList,
             sortOption: sortOption,
             sortWhoWinsOption: sortWhoWinsOption
         ))

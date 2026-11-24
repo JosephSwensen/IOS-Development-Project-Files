@@ -4,6 +4,7 @@ struct Player: Identifiable, Equatable {
     let id = UUID()
     var name: String
     var score = 0
+    var icon = "person.fill"
 }
 
 struct Game: Identifiable {

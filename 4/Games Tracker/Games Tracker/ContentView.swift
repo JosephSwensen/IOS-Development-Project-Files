@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var gameInfo:GamesViewModel = GamesViewModel()
+    @State var gameInfo = GamesViewModel()
     
     var body: some View {
         NavigationStack {
@@ -27,12 +27,20 @@ struct ContentView: View {
                             } else {
                                 Text("Add players")
                             }
-                            
                         }
                     }
                 }
+                .onDelete { offsets in
+                    gameInfo.games.remove(atOffsets: offsets)
+                }
+                .onMove { offsets, destination in
+                    gameInfo.games.move(fromOffsets: offsets, toOffset: destination)
+                }
             }
             .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    EditButton()
+                }
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("+") {
                         gameInfo.sheetIsShowing = true
@@ -75,27 +83,21 @@ struct ContentView: View {
                         }
                         
                         List {
-                            ForEach(gameInfo.playerList, id: \.self) { player in
-                                Text(player)
+                            ForEach(gameInfo.playerList) { player in
+                                Label(player.name, systemImage: player.icon)
                             }
                         }
                         
                         Button("Add Players") {
-                            gameInfo.showAddPlayerAlert = true
+                            gameInfo.showAddPlayerSheet = true
                         }
-                        .buttonStyle(.glassProminent)
-                        .alert("Add Player", isPresented: $gameInfo.showAddPlayerAlert) {
-                            TextField("Type Your Name", text: $gameInfo.textBox)
-                            
-                            Button("Save") {
-                                gameInfo.addPlayer()
-                                gameInfo.textBox = ""
-                            }
-                            Button("Cancel", role: .cancel) {
-                                gameInfo.cancelAddingPlayer()
+                        .buttonStyle(.tracker)
+                        .sheet(isPresented: $gameInfo.showAddPlayerSheet) {
+                            AddPlayerView { player in
+                                gameInfo.addPlayer(player)
                             }
                         }
-                        
+
                         .toolbar {
                             ToolbarItem(placement: .navigationBarLeading) {
                                 Button("Save") {
