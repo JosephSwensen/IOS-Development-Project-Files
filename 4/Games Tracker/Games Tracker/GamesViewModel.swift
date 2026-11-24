@@ -13,10 +13,10 @@ class GamesViewModel {
 
     var sheetIsShowing = false
     var newGameTitle = ""
-    let sortBy = ["Wins", "Kills"]
-    var sortOption = "Wins"
-    let sortWhoWins = ["s", "g"]
-    var sortWhoWinsOption = "s"
+    let sortBy = ["Highest total", "Lowest total"]
+    var sortOption = "Highest total"
+    let sortWhoWins = ["Highest total", "Lowest total"]
+    var sortWhoWinsOption = "Highest total"
     var showAddPlayerAlert = false
     var textBox = ""
     var playerList: [String] = []
@@ -37,9 +37,16 @@ class GamesViewModel {
             return
         }
 
-        games.append(Game(title: newGameTitle, players: playerList.map { Player(name: $0) }))
+        games.append(Game(
+            title: newGameTitle,
+            players: playerList.map { Player(name: $0) },
+            sortOption: sortOption,
+            sortWhoWinsOption: sortWhoWinsOption
+        ))
         sheetIsShowing = false
         playerList = []
         newGameTitle = ""
+        sortOption = "Highest total"
+        sortWhoWinsOption = "Highest total"
     }
 }

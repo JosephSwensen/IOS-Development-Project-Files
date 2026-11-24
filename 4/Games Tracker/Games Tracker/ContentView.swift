@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var gameInfo = GamesViewModel()
+    @State var gameInfo:GamesViewModel = GamesViewModel()
     
     var body: some View {
         NavigationStack {
@@ -18,8 +18,12 @@ struct ContentView: View {
                         HStack {
                             Text(game.title)
                             Spacer()
-                            if let winner = game.players.first?.name {
-                                Text("Current Winner: \( game.players.first!.name) ")
+                            let winner = game.sortWhoWinsOption == "Lowest total"
+                                ? game.players.min(by: { $0.score < $1.score })
+                                : game.players.max(by: { $0.score < $1.score })
+
+                            if let winner {
+                                Text("Current Winner: \(winner.name)")
                             } else {
                                 Text("Add players")
                             }
@@ -85,6 +89,7 @@ struct ContentView: View {
                             
                             Button("Save") {
                                 gameInfo.addPlayer()
+                                gameInfo.textBox = ""
                             }
                             Button("Cancel", role: .cancel) {
                                 gameInfo.cancelAddingPlayer()
